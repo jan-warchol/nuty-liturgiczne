@@ -62,7 +62,7 @@ melodiaAltu =
   %-=10=-
   g4 f2 |
   d8 d f4 d |
-  d4 e2 |
+  d4 f2 |
   d8[( c]) f4 d |
   g4 g2 |
   %-=15=-

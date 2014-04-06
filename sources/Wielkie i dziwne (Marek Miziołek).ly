@@ -53,8 +53,8 @@ melodiaAltu =
   c4 d4 |
   d4 d8 g8 |
   e4 d4 |
-  a4 b8 a8 |
-  b4 b4 |
+  d4 b8 d8 |
+  g8( fis8) e4 |
   e2 |
   d4. d8 |
   e8( d8) e4 ~ |
@@ -72,15 +72,17 @@ melodiaTenorow =
   d8 |
   a4 a4 |
   c4 d8 e8 |
-  g8( d8) e4 |
+  % początkowo pierwszym dźwiękiem miało być g,
+  % ale zostało zmienione na e żeby dało się zaśpiewać.
+  e8( d8) e4 |
   b4 b4 |
   d4 d4 |
   e4 e4 |
   c4 d4 |
   g,4 d8 g8 |
   a8( g8) a4 |
-  d4 b8 d8 |
-  g8( fis8) e4 |
+  a4 b8 a8 |
+  b4 b4 |
   c8( b8 a8 g8) |
   a4. a8 |
   b8( a8) b4 ~ |
@@ -96,8 +98,10 @@ melodiaBasow =
   \metrumitp
   b,4 b8 d8 |
   a4 a4 |
+  % to e jest zdecydowanie za nisko dla zwykłych basów.
+  % proponuję zmienić je na g -- Janek Warchoł
   a4 a8 e8 |
-  g4 b4 |
+  g8( a) b4 |
   g4 g4 |
   d'4 d4 |
   a4 b8( c8) |
@@ -117,6 +121,11 @@ melodiaBasow =
   \bar "|."
 }
 akordy = \chordmode {
+  g2 d a:m e:m7 g d
+  a:m d4:7sus4 d:7 g2 d b:m7 e:m
+  %Królu narodów
+  c2 d e1:m
+  c2 d e1:m
 }
 
 %--------------------------------SŁOWA

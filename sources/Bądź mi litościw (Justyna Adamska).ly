@@ -70,16 +70,14 @@ melodiaBasow =
 }
 
 akordy = \chordmode {
-  %{
-    e2:m7 c4 c7?
-    f4 ?? e2:m
-    e2:m c4 a:m7
-    f4 ?? e2:m
-    g4 7? c d e:m
-    b:m2 e4:m ??
-    e2:m c:maj7
-    f4 ?? e2:m
-  %}
+  e2:m7 c4 c4:maj7
+  a,4:m6 b,:7 e2:m
+  e2:m c4 a,:m
+  a,4:m6 b,:7 e2:m
+  g4:maj7 c d e:m
+  b,2:m e4:m b,:7
+  e2:m c:maj7
+  a,4:m6 b,:7 e2:m
 }
 
 %--------------------------------SŁOWA
@@ -100,6 +98,31 @@ tekstTenorow =  \lyricmode {
   chciej zma -- zać mnó -- stwo prze -- wi -- nie -- nia me -- go.
 }
 tekstBasow = \tekstTenorow
+
+zwrotkaII = \markup \column {
+  "Obmyj mię z złości, obmyj tej godziny,"
+  "Oczyść mię z brudu, w którym grzech mię trzyma;"
+  "Bo ja poznaję wielkość mojej winy"
+  "I grzech mój zawsze przed mymi oczyma."
+}
+zwrotkaIII = \markup \column {
+  "Odpuść! przed Tobą grzech mój popełniony,"
+  "Boś przyrzekł, że ta kary ujdzie głowa,"
+  "Którąć przyniesie grzesznik uniżony, "
+  "By nie mówiono, że nie trzymasz słowa."
+}
+zwrotkaIV = \markup \column {
+  "Odwróć twarz Twoją od przestępstwa mego"
+  "I wszystkie moje pomaż nieprawości;"
+  "Stwórz serce czyste, warte Boga swego,"
+  "A ducha prawdy w moje wlej wnętrzności."
+}
+zwrotkaV = \markup \column {
+  "Nie oddalaj mię od ojcowskiej twarzy, "
+  "Nie chciej mi bronić Twojego natchnienia;"
+  "Wróć radość, którą niewinność nas darzy "
+  "I racz mię w duchu utwierdzić rządzenia."
+}
 
 %--------------------------------USTAWIENIA
 #(set-global-staff-size 16.5)
@@ -141,3 +164,7 @@ tekstBasow = \tekstTenorow
   \layout {}
   \midi {}
 }
+
+\markup
+\override #'(stanza-vdist . 2)
+\stanzas-in-two-columns { \zwrotkaII \zwrotkaIII } { \zwrotkaIV \zwrotkaV }
