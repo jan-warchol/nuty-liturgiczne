@@ -17,102 +17,102 @@ melodiaSopranu =
 \relative f' {
   \metrumitp
   g4 g8 g8
-  fis4 fis4 | % 3
-  a4 a8 e8 | % 4
-  g8( fis8) e4 | % 5
-  b'4 b4 | % 6
-  a4 a4 | % 7
-  a4 a4 | % 8
-  g4 fis4 | % 9
-  g4 g8 g8 | \barNumberCheck #10
-  d4 d4 | % 11
-  d4 d8 d8 | % 12
-  e4 e4 | % 13
+  fis4 fis4 |
+  a4 a8 e8 |
+  g8( fis8) e4 |
+  b'4 b4 |
+  a4 a4 |
+  a4 a4 |
+  g4 fis4 |
+  g4 g8 g8 |
+  d4 d4 |
+  d4 d8 d8 |
+  e4 e4 |
   \break
-  e2 | % 14
-  fis4. fis8 | % 15
-  g8( fis8) e4 ~ | % 16
-  e r4 | % 17
-  e2 | % 18
-  fis4. fis8 | % 19
-  g8( fis8) e4 ~ | \barNumberCheck #20
-  e4 r | % 21
+  e2 |
+  fis4. fis8 |
+  g8( fis8) e4 ~ |
+  e r4 |
+  e2 |
+  fis4. fis8 |
+  g8( fis8) e4 ~ |
+  e4 r |
   \bar "|."
 }
 melodiaAltu =
 \relative f' {
   \metrumitp
   g4 g8 g8
-  fis4 fis4 | % 3
-  e4 e8 c8 | % 4
-  d4 e4 | % 5
-  e4 e4 | % 6
-  a8( g8) a4 | % 7
-  e4 e4 | % 8
-  c4 d4 | % 9
-  d4 d8 g8 | \barNumberCheck #10
-  e4 d4 | % 11
-  a4 b8 a8 | % 12
-  b4 b4 | % 13
-  e2 | % 14
-  d4. d8 | % 15
-  e8( d8) e4 ~ | % 16
-  e4 r4 | % 17
-  e2 | % 18
-  d4. d8 | % 19
-  e8( d8) e4 ~ | \barNumberCheck #20
-  e4 r4 | % 21
+  fis4 fis4 |
+  e4 e8 c8 |
+  d4 e4 |
+  e4 e4 |
+  a8( g8) a4 |
+  e4 e4 |
+  c4 d4 |
+  d4 d8 g8 |
+  e4 d4 |
+  a4 b8 a8 |
+  b4 b4 |
+  e2 |
+  d4. d8 |
+  e8( d8) e4 ~ |
+  e4 r4 |
+  e2 |
+  d4. d8 |
+  e8( d8) e4 ~ |
+  e4 r4 |
   \bar "|."
 }
 melodiaTenorow =
 \relative f {
   \metrumitp
   b4 b8
-  d8 | % 2
-  a4 a4 | % 3
-  c4 d8 e8 | % 4
-  g8( d8) e4 | % 5
-  b4 b4 | % 6
-  d4 d4 | % 7
-  e4 e4 | % 8
-  c4 d4 | % 9
-  g,4 d8 g8 | \barNumberCheck #10
-  a8( g8) a4 | % 11
-  d4 b8 d8 | % 12
-  g8( fis8) e4 | % 13
-  c8( b8 a8 g8) | % 14
-  a4. a8 | % 15
-  b8( a8) b4 ~ | % 16
-  b4 r4 | % 17
-  e,8( fis8 g4) | % 18
-  a4. a8 | % 19
-  b8( a8) b4 ~ | \barNumberCheck #20
-  b4 r4 | % 21
+  d8 |
+  a4 a4 |
+  c4 d8 e8 |
+  g8( d8) e4 |
+  b4 b4 |
+  d4 d4 |
+  e4 e4 |
+  c4 d4 |
+  g,4 d8 g8 |
+  a8( g8) a4 |
+  d4 b8 d8 |
+  g8( fis8) e4 |
+  c8( b8 a8 g8) |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
+  e,8( fis8 g4) |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
   \bar "|."
 }
 melodiaBasow =
 \relative f {
   \metrumitp
-  b,4 b8 d8 | % 2
-  a4 a4 | % 3
-  a4 a8 e8 | % 4
-  g4 b4 | % 5
-  g4 g4 | % 6
-  d'4 d4 | % 7
-  a4 b8( c8) | % 8
-  d4 d4 | % 9
-  g,4 g8 g8 | \barNumberCheck #10
-  d'4 d4 | % 11
-  b4 b8 b8 | % 12
-  c8( b8) a4 | % 13
-  c2 | % 14
-  a4. a8 | % 15
-  b8( a8) b4 ~ | % 16
-  b4 r4 | % 17
-  c2 | % 18
-  a4. a8 | % 19
-  b8( a8) b4 ~ | \barNumberCheck #20
-  b4 r4 | % 21
+  b,4 b8 d8 |
+  a4 a4 |
+  a4 a8 e8 |
+  g4 b4 |
+  g4 g4 |
+  d'4 d4 |
+  a4 b8( c8) |
+  d4 d4 |
+  g,4 g8 g8 |
+  d'4 d4 |
+  b4 b8 b8 |
+  c8( b8) a4 |
+  c2 |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
+  c2 |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
   \bar "|."
 }
 akordy = \chordmode {

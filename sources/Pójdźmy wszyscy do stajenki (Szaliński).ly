@@ -15,44 +15,68 @@ commonprops = {
 }
 %--------------------------------MELODY--------------------------------
 sopranomelody = \relative c'' {
-  d,4 e d e | d4. g8 b4 g | d e d e | d4. g8 b4 g |
+  d,4 e d e |
+  d4. g8 b4 g |
+  d e d e |
+  d4. g8 b4 g |
   \repeat volta 2 {
-    c4. b8 a4 a | b4. a8 g4 g | fis fis e fis |
+    c4. b8 a4 a |
+    b4. a8 g4 g |
+    fis fis e fis |
   }
   \alternative{
     { g4. a8 b4 b }
     { g4. a8 g4 g }
-  } \bar "|."
+  }
+  \bar "|."
 }
 altomelody = \relative f' {
-  b,4 c b c | b4. d8 g4 d | b c b c | b4. d8 g4 d |
+  b,4 c b c |
+  b4. d8 g4 d |
+  b c b c |
+  b4. d8 g4 d |
   \repeat volta 2 {
-    g4. fis8 e4 e | fis4. e8 d4 d | d d cis c |
+    g4. fis8 e4 e |
+    fis4. e8 d4 d |
+    d d cis c |
   }
   \alternative {
     { b4. d8 g4 g }
     { b,4. c8 b4 b }
-  } \bar "|."
+  }
+  \bar "|."
 }
 tenormelody = \relative c' {
-  g4 g g g | g4. b8 d4 b | g g g g | g4. b8 d4 b |
+  g4 g g g |
+  g4. b8 d4 b |
+  g g g g |
+  g4. b8 d4 b |
   \repeat volta 2 {
-    e4. d8 c4 c | d4. c8 b4 b | a a a a |
+    e4. d8 c4 c |
+    d4. c8 b4 b |
+    a a a a |
   }
   \alternative {
     { g g d' d}
     { g, g g g}
-  } \bar "|."
+  }
+  \bar "|."
 }
 bassmelody = \relative f {
-  g4 g g g | g4. g8 g4 g | g g g g | g4. g8 g4 g |
+  g4 g g g |
+  g4. g8 g4 g |
+  g g g g |
+  g4. g8 g4 g |
   \repeat volta 2 {
-    d4 e8->[ fis->] g4 fis8[-> e]-> | d4 e8->[ fis->] g4 g | a a g8[( fis]) e([ d)] |
+    d4 e8->[ fis->] g4 fis8[-> e]-> |
+    d4 e8->[ fis->] g4 g |
+    a a g8[( fis]) e([ d)] |
   }
   \alternative {
     { g4 g g g}
     { g g g, g}
-  } \bar "|."
+  }
+  \bar "|."
 }
 akordy = \chordmode {
   \set chordNameLowercaseMinor = ##t

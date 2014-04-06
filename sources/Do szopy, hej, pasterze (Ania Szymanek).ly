@@ -21,114 +21,119 @@ staffprops =
 }
 %--------------------------------MELODY--------------------------------
 firstsopranomelody =
-{
-  \partial 4 c''4 f''2.
-  e''2 e''4
-  d''2.
-  c''2 a'4
+\relative c'' {
+  \partial 4 c4 f2.
+  e2 e4
+  d2.
+  c2 a4
   %-=5=-
-  d''2.
-  e''2.
-  g''2 e''4
-  f''2 e''4
-  e''2.
+  d2.
+  e2.
+  g2 e4
+  f2 e4
+  e2.
   %-=10=-
-  d''2 g'4
-  bes' d'' c''8 b'
-  c''2 c''4
-  d''2.
-  e''2.
+  d2 g,4
+  bes d c8 b
+  c2 c4
+  d2.
+  e2.
   %-=15=-
-  g''2 e''4
-  f''2 r4 \bar "|."
+  g2 e4
+  f2 r4
+  \bar "|."
 }
 secondsopranomelody =
-{
-  \partial 4 c''4 c'' bes' bes'8 a'
-  bes'4 a' c''
-  d'' c'' c''8 c''
-  a'2 c''4
+\relative c'' {
+  \partial 4 c4 c bes bes8 a
+  bes4 a c
+  d c c8 c
+  a2 c4
   %-=5=-
-  bes' a' g'8 f'
-  c''4 c'' a'
-  c'' c'' a'8 bes'
-  c''2 c''4
-  a' a' d''8 c''
+  bes a g8 f
+  c'4 c a
+  c c a8 bes
+  c2 c4
+  a a d8 c
   %-=10=-
-  c''4 bes' g'
-  bes' d'' c''8 b'
-  c''2 a'4
-  f' a' d''8 c''
-  bes'4 bes' c''
+  c4 bes g
+  bes d c8 b
+  c2 a4
+  f a d8 c
+  bes4 bes c
   %-=15=-
-  c'' bes' a'8 g'
-  a'2 r4 \bar "|."
+  c bes a8 g
+  a2 r4
+  \bar "|."
 }
 altomelody =
-{
-  \partial 4 c'4 f' f' g'8 f'
-  e'4 e' c'
-  g' g' a'8 g'
-  f'2 c'4
+\relative c' {
+  \partial 4 c4 f f g8 f
+  e4 e c
+  g' g a8 g
+  f2 c4
   %-=5=-
-  f' f' g'8 f'
-  e'4 e' c'
-  g' g' a'8 g'
-  f'2 e'4
-  e' c' e'8 f'
+  f f g8 f
+  e4 e c
+  g' g a8 g
+  f2 e4
+  e c e8 f
   %-=10=-
-  g'4 d' e'
-  d' d' c'8 b
-  c'2 c'4
-  a' a' bes'8 a'
-  g'4 g' c'
+  g4 d e
+  d d c8 b
+  c2 c4
+  a' a bes8 a
+  g4 g c,
   %-=15=-
-  g' g' a'8 g'
-  f'2 r4 \bar "|."
+  g' g a8 g
+  f2 r4
+  \bar "|."
 }
 tenormelody =
-{
-  \partial 4 c'4 a bes d'8 c'
+\relative c' {
+  \partial 4 c4 a bes d8 c
   g4 a f
-  g c' a8 c'
-  c'2 c'4
+  g c a8 c
+  c2 c4
   %-=5=-
-  bes a d'8 c'
-  a4 g c'
-  g c' c'8 bes
-  a2 c4
-  a a bes8 a
+  bes a d8 c
+  a4 g c
+  g c c8 bes
+  a2 c,4
+  a' a bes8 a
   %-=10=-
   g4 g g
-  bes d' c'8 b
-  c'2 f4
-  f f g8 c'
+  bes d c8 b
+  c2 f,4
+  f f g8 c
   g4 bes a
   %-=15=-
   g bes a8 bes
-  c'2 r4 \bar"|."
+  c2 r4
+  \bar "|."
 }
 bassmelody =
-{
+\relative c {
   \partial 4 c4 f d d8 f
-  e4 c a,
-  bes, e e8 c
+  e4 c a
+  bes e e8 c
   f2 c4
   %-=5=-
-  f, c d8 f
+  f, c' d8 f
   e4 c f
   c c d8 c
   f2 e4
   c e d8 e
   %-=10=-
   d4 g e
-  f d c8 b,
+  f d c8 b
   c2 f4
   c f d8 e
   e4 g e
   %-=15=-
-  c bes, c8 bes,
-  f,2 r4 \bar"|."
+  c bes c8 bes
+  f2 r4
+  \bar "|."
 }
 %--------------------------------LYRICS--------------------------------
 firstsopranolyrics =  \lyricmode
