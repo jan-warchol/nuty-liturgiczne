@@ -1,3 +1,5 @@
+\version "2.19.3"
+
 right = { \once \override LyricText #'self-alignment-X = #-0.8 }
 righty = { \once \override LyricText #'self-alignment-X = #-0.6 }
 rightyy = { \once \override LyricText #'self-alignment-X = #-0.4 }
@@ -13,15 +15,7 @@ leftyyy = { \once \override LyricText #'self-alignment-X = #0.2 }
   arranger = "opracowanie: A. Piecuch, J. Gałuszka OP"
 }
 
-\paper {
-  top-margin = 12 \mm
-  left-margin = 16 \mm
-  right-margin = 14 \mm
-  bottom-margin = 10 \mm
-  ragged-last-bottom = ##f
-}
-
-#(set-global-staff-size 18)
+%--------------------------------MUZYKA
 
 sopran = \relative f' {
   \time 6/4
@@ -125,6 +119,7 @@ bas = \relative f {
   \bar "|."
 }
 
+%--------------------------------SŁOWA
 
 tekst = \lyricmode {
   Ma -- ra -- na -- tha,
@@ -139,99 +134,58 @@ tekst = \lyricmode {
   od Bo -- _ ga.
 }
 
+zwrotkaII = \markup \column {
+  "Dwudziestu | czterech starców i | czworo zwierząt przed | tronem, | pokłon od|dało Mu: Al|lelu|ja!"
+  "I | wyszedł głos od | tronu, | wszyscy Jego | słudzy | chwalcie | Go!"
+}
+zwrotkaIII = \markup \column {
+  "I usłyszałem głos jakby huk potężnych gromów, Głos, który w niebie grzmiał: Alleluja!"
+  "Bo zakrólował Pan Bóg nasz, bo zakrólował Pan Bóg nasz, wszechmocny!"
+}
+zwrotkaIV = \markup \column {
+  "Oto nadeszły chwalebne gody Baranka, małżonka czeka już: Alleluja!"
+  "Błogosławieni, którzy wezwani są na ucztę Baranka!"
+}
 
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 17)
 
-%--------------------------------LAYOUT--------------------------------
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 5
+  markup-system-spacing #'padding = -3
+  system-system-spacing #'basic-distance = 17
+  score-markup-spacing #'basic-distance = 17
+  top-margin = 12 \mm
+  bottom-margin = 10 \mm
+  ragged-last-bottom = ##f
+}
+
+%--------------------------------STRUKTURA
 \score {
   \new ChoirStaff <<
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \set Voice.midiInstrument = "clarinet"
-        \sopran
-      }
-    }
-    \new Lyrics = sopranolyrics \lyricsto soprano \tekst
+    \new SopranoVoice = sopran \sopran
+    \new Lyrics \lyricsto sopran \tekst
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \set Voice.midiInstrument = "english horn"
-        \alt
-      }
-    }
-    \new Lyrics = altolyrics \lyricsto alto \tekst
+    \new AltoVoice = alt \alt
+    \new Lyrics \lyricsto alt \tekst
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \set Voice.midiInstrument = "english horn"
-        \tenor
-      }
-    }
-    \new Lyrics = tenorlyrics \lyricsto tenor \tekst
+    \new TenorVoice = tenor \tenor
+    \new Lyrics \lyricsto tenor \tekst
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \set Voice.midiInstrument = "clarinet"
-        \bas
-      }
-    }
-    \new Lyrics = basslyrics \lyricsto bass \tekst
+    \new BassVoice = bas \bas
+    \new Lyrics \lyricsto bas \tekst
   >>
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
+  \layout {}
   \midi {}
 }
 
-\markup {
-  \fill-line {
-    \large {
-      \hspace #0.1
-      \column {
-        \line {
-          "2. "
-          \column {
-            "Dwudziestu | czterech starców i | czworo zwierząt przed | tronem, | pokłon od|dało Mu: Al|lelu|ja!"
-            "I | wyszedł głos od | tronu, | wszyscy Jego | słudzy | chwalcie | Go!"
-          }
-        }
-        \hspace #0.1
-        \line {
-          "3. "
-          \column {
-            "I usłyszałem głos jakby huk potężnych gromów, Głos, który w niebie grzmiał: Alleluja!"
-            "Bo zakrólował Pan Bóg nasz, bo zakrólował Pan Bóg nasz, wszechmocny!"
-          }
-        }
-        \hspace #0.1
-        \line {
-          "4. "
-          \column {
-            "Oto nadeszły chwalebne gody Baranka, małżonka czeka już: Alleluja!"
-            "Błogosławieni, którzy wezwani są na ucztę Baranka!"
-          }
-        }
-      }
-      \hspace #0.1
-    }
-  }
-}
-
-\markup \vspace #1
+\markup
+\override #'(stanza-vdist . 0.9)
+\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV }
 
 %{
   \new RhythmicStaff {

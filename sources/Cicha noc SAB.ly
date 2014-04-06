@@ -1,23 +1,26 @@
-%{TODO:
-  czy e-molle na początku w akordach nie są przekombinowane?
-%}
+\version "2.19.3"
 
-\version "2.12.3"
-\pointAndClickOff
 \header	{
   title = "Cicha noc"
+  subtitle = \markup \column { " " " " }
   composer = "muzyka: Franz Xaver Gruber (1787-1863)"
-  poet = \markup { \column {"słowa: ks. Józef Mohr (1792-1848)" "tłumaczenie: Piotr Maszyński" } }
+  poet = \markup \column {
+    "słowa: ks. Józef Mohr (1792-1848)"
+    "tłumaczenie: Piotr Maszyński"
+  }
 }
-commonprops = {
-  \autoBeamOff
-  \tempo 4 = 50
-  \set Score.tempoHideNote = ##t
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key c \major
   \time 6/8
+  \tempo 4 = 50
+  \set Score.tempoHideNote = ##t
 }
-%--------------------------------MELODY--------------------------------
-sopranomelody =	\relative c'' {
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
   g8.[( a16]) g8 e4. |
   g8.[( a16]) g8 e4. \breathe |
   d'4 d8 b4 b8 |
@@ -31,9 +34,12 @@ sopranomelody =	\relative c'' {
   d'4 d8 f8.[( d16)] b8 |
   c4.( e\fermata) \breathe |
   c8.[( g16)] e8 g8.[( f16)] d8 |
-  c2. \bar "|."
+  c2.
+  \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   e8.[( f16]) e8 c4. |
   c4 c8 c4. \breathe |
   d4 a'8 g4 f8 |
@@ -47,9 +53,12 @@ altomelody = \relative f' {
   f4 a8 g4 f8 |
   e4.( b') \breathe |
   e,4 c8 b4 b8 |
-  c2. \bar "|."
+  c2.
+  \bar "|."
 }
-bassmelody = \relative f{
+melodiaBasow =
+\relative f {
+  \metrumitp
   r4. g8.[( a16]) g8 |
   e4. g8.[( a16]) g8 \breathe |
   f4 f8 g4 g8 |
@@ -63,17 +72,20 @@ bassmelody = \relative f{
   d4 f8 g4 g8 |
   a4.( g) \breathe |
   c,4 c8 d4 g8 |
-  c,2. \bar "|."
+  c,2.
+  \bar "|."
 }
+
 akordy = \chordmode {
-  \set chordNameLowercaseMinor = ##t
+  %czy e-molle na początku w akordach nie są przekombinowane?
   e4.:m c e:m c d4.:m g c2.
   f4. d:m7 e:m a:m f d:m7 e:m a:m
   d:m g:7 a:m e:m c g c2.
 }
-%--------------------------------LYRICS--------------------------------
-womentext =  \lyricmode {
-  \set stanza = "1. "
+
+%--------------------------------SŁOWA
+tekstSopranu = \lyricmode {
+  \set stanza = "1."
   Ci -- cha noc! | Świę -- ta noc! |
   Po -- kój nie -- sie | lu -- dziom wszem, | \break
   a u żłó -- bka | Ma -- tka Świę -- ta |
@@ -81,9 +93,12 @@ womentext =  \lyricmode {
   nad Dzie -- cią -- tka | snem, |
   nad Dzie -- cią -- tka | snem. |
 }
-mentext =  \lyricmode {
-  \set stanza = "1. "
-  Ci -- cha |	noc! Świę -- ta! |
+
+tekstAltu = \tekstSopranu
+
+tekstBasow = \lyricmode {
+  \set stanza = "1."
+  Ci -- cha | noc! Świę -- ta! |
   Po -- kój nie -- sie | lu -- dziom wszem, |
   a u żłó -- bka | Ma -- tka Świę -- ta |
   czu -- wa sa -- ma | u -- śmiech -- nię -- ta |
@@ -91,105 +106,55 @@ mentext =  \lyricmode {
   nad Dzie -- cią -- tka | snem. |
 }
 
-stanzas = \markup {
-  \fill-line {
-    \large {
-      \hspace #0.1
-      \line {
-        "2. "
-        \column	{
-          "Cicha noc, święta noc!"
-          "Pastuszkowie od swych trzód"
-          "biegną wielce zadziwieni"
-          "za anielskich głosem pieni,"
-          "gdzie się spełnił cud,"
-          "gdzie się spełnił cud."
-        }
-      }
-      \hspace #0.1
-      \line {
-        "3. "
-        \column {
-          "Cicha noc, święta noc!"
-          "Narodzony Boży Syn,"
-          "Pan wielkiego majestatu"
-          "niesie dziś całemu światu"
-          "odkupienie win,"
-          "odkupienie win."
-        }
-      }
-      \hspace #0.1
-    }
-  }
+zwrotkaII = \markup \column {
+  "Cicha noc, święta noc!"
+  "Pastuszkowie od swych trzód"
+  "biegną wielce zadziwieni"
+  "za anielskich głosem pieni,"
+  "gdzie się spełnił cud,"
+  "gdzie się spełnił cud."
+}
+zwrotkaIII = \markup \column {
+  "Cicha noc, święta noc!"
+  "Narodzony Boży Syn,"
+  "Pan wielkiego majestatu"
+  "niesie dziś całemu światu"
+  "odkupienie win,"
+  "odkupienie win."
 }
 
-%--------------------------------ALL-FILE VARIABLE--------------------------------
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 17)
 
-threestaveschoir = {
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 8
+  markup-system-spacing #'basic-distance = 24
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 16
+  left-margin = 20 \mm
+  right-margin = 20 \mm
+}
+
+%--------------------------------STRUKTURA
+\score {
   \new ChoirStaff <<
-    \new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \sopranomelody
-      }
-    }
-    \new Lyrics = sopranolyrics \lyricsto soprano \womentext
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \altomelody
-      }
-    }
-    \new Lyrics = altolyrics \lyricsto alto \womentext
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \bassmelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto bass \mentext
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
 
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \threestaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \threestaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas
+\markup \stanzas-in-two-columns { \zwrotkaII } { \zwrotkaIII }

@@ -1,25 +1,22 @@
-\version "2.12.3"
-\pointAndClickOff
+\version "2.19.3"
+
 \header	{
   title = "Skosztujcie i zobaczcie"
   subtitle = "Psalm 34"
   composer = "muzyka: ks. Stanisław Ziemiański SJ"
   arranger = "opracowanie: Łukasz Czerwiński, Jan Warchoł"
 }
-commonprops = {
-  \autoBeamOff
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key bes \major
   \time 2/4
-  \tempo 4=75
-  \set Score.tempoHideNote = ##t
+  \tempo Moderato 4=75
 }
-\paper {
-  system-count = #3
-  page-count = #1
-}
-#(set-global-staff-size 18)
-%--------------------------------MELODY--------------------------------
-sopranomelody =	\relative c'' {
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
   \repeat volta 2 {
     r8 g a bes | c bes a[( bes]) | g4.
     g8 | f4 d8 es | f2
@@ -30,7 +27,9 @@ sopranomelody =	\relative c'' {
   \time 4/4 g8 f d es f4 f \fermata |
   \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   \repeat volta 2 {
     r8 d d d | g8 g f4 | es4.
     d8 | d[( f16 es]) d8 c | c2
@@ -41,9 +40,11 @@ altomelody = \relative f' {
   es8 es c c c4 c \fermata |
   \bar "|."
 }
-tenormelody = \relative c' {
+melodiaTenorow =
+\relative f {
+  \metrumitp
   \repeat volta 2 {
-    r8 d d d | c es d[( a]) | g4.
+    r8 d' d d | c es d[( a]) | g4.
     bes8 | f4 f8 bes | a2
   }
   a8 a g g a a   bes4 bes |
@@ -52,7 +53,9 @@ tenormelody = \relative c' {
   g8 g g g   bes4 a \fermata |
   \bar "|."
 }
-bassmelody = \relative f {
+melodiaBasow =
+\relative f {
+  \metrumitp
   \repeat volta 2 {
     r8 g g g | c, c d4 | es4.
     g,8 | bes4 bes8 bes | c2
@@ -63,8 +66,8 @@ bassmelody = \relative f {
   c8 c c c f,4 f \fermata
   \bar "|."
 }
+
 akordy = \chordmode {
-  \set chordNameLowercaseMinor = ##t
   \repeat volta 2 {
     g2:m c4:m d:m es2
     bes f2
@@ -74,8 +77,9 @@ akordy = \chordmode {
   bes2 g4:m es2
   c2:m f2
 }
-%--------------------------------LYRICS--------------------------------
-text = \lyricmode {
+
+%--------------------------------SŁOWA
+tekst = \lyricmode {
   Skosz -- tuj -- cie i zo -- bacz -- cie,
   jak do -- bry jest Pan.
   \set stanza = "1. "
@@ -84,99 +88,70 @@ text = \lyricmode {
   Niech z_ust mo -- ich chwa -- ła Je -- go
   nie -- u -- stan -- nie pły -- nie.
 }
-stanzas = \markup {
-  \fill-line {
-    {
-      \hspace #0.1
-      \column {
-        "2. W Panu cała chluba moja, cieszcie się pokorni; wspólnie ze mną chwalcie Pana, sławmy Imię Jego."
-        "3. Kiedym tęsknie szukał Pana, raczył mnie wysłuchać; i ze wszelkiej trwogi mojej raczył mnie wyzwolić."
-        "4. Skosztujcie i zobaczcie, jaki Pan jest dobry; kto do Niego się ucieknie, ten błogosławiony."
-        "5. Z czcią i lękiem służcie Panu, Święty Ludu Boży; bo nie znają niedostatku ludzie bogobojni."
-      }
-      \hspace #0.1
-    }
-  }
-}
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-fourstaveschoir = {
+tekstSopranu = \tekst
+tekstAltu = \tekst
+tekstTenorow = \tekst
+tekstBasow = \tekst
+
+zwrotkaII = \markup \column {
+  "W Panu cała chluba moja, cieszcie się pokorni;"
+  "Wspólnie ze mną chwalcie Pana, sławmy Imię Jego."
+}
+zwrotkaIII = \markup \column {
+  "Kiedym tęsknie szukał Pana, raczył mnie wysłuchać;"
+  "I ze wszelkiej trwogi mojej raczył mnie wyzwolić."
+}
+zwrotkaIV = \markup \column {
+  "Skosztujcie i zobaczcie, jaki Pan jest dobry;"
+  "Kto do Niego się ucieknie, ten błogosławiony."
+}
+zwrotkaV = \markup \column {
+  "Z czcią i lękiem służcie Panu, Święty Ludu Boży;"
+  "Bo nie znają niedostatku ludzie bogobojni."
+}
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 16.5)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  system-count = #3
+}
+\paper {
+  top-markup-spacing #'basic-distance = 4
+  markup-system-spacing #'padding = -2
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 14
+}
+
+%--------------------------------STRUKTURA
+
+\score {
+  %\transpose g a
   \new ChoirStaff <<
-    \new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "Choir Aahs"
-        \sopranomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto soprano \text
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "Choir Aahs"
-        \altomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto soprano \text
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \commonprops
-        \set Voice.midiInstrument = "Choir Aahs"
-        \tenormelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto tenor \text
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "Choir Aahs"
-        \bassmelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto tenor \text
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
 
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \fourstaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \fourstaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas
+\markup
+\override #'(line-spacing . 0.85)
+\override #'(stanza-vdist . 0.55)
+\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

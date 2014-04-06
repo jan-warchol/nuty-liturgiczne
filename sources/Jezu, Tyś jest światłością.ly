@@ -1,19 +1,22 @@
-\version "2.15.33"
-\pointAndClickOff
+\version "2.19.3"
+
 \header	{
   title = "Jezu, Tyś jest światłością"
   subtitle = "(ostinato)"
   composer = "muzyka: Taizé"
 }
-commonprops = {
-  \autoBeamOff
-  \tempo 4=70
-  \set Score.tempoHideNote = ##t
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key b \minor
   \time 4/4
+  \tempo 4=70
+  \set Score.tempoHideNote = ##t
 }
-%--------------------------------MELODY--------------------------------
-sopranomelody =	\relative c'' {
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
   b8 b4 fis8 g4 r8 e |
   a4 a8 e fis4 fis |
   d d8 d e4 d8 e |
@@ -25,7 +28,9 @@ sopranomelody =	\relative c'' {
   fis4 b8 ais b2
   \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   d8 d4 d8 e4 r8 e |
   cis4 b8 cis d4 d |
   d d8 d cis4 b8 cis |
@@ -37,8 +42,10 @@ altomelody = \relative f' {
   d4 cis8 cis d2
   \bar "|."
 }
-tenormelody = \relative c' {
-  fis,8 fis4 b8 b4 r8 g |
+melodiaTenorow =
+\relative f {
+  \metrumitp
+  fis8 fis4 b8 b4 r8 g |
   e4 e8 a a4 a |
   b fis8 fis a4 a8 a |
   a a b b cis2 |
@@ -49,7 +56,9 @@ tenormelody = \relative c' {
   b4 fis8 fis fis2
   \bar "|."
 }
-bassmelody = \relative f {
+melodiaBasow =
+\relative f {
+  \metrumitp
   b,8 b4 b8 e4 r8 e |
   a,4 a8 a d4 d |
   b b8 b a4 a8 a |
@@ -61,99 +70,57 @@ bassmelody = \relative f {
   fis4 fis8 fis b,2
   \bar "|."
 }
+
 akordy = \chordmode {
   b2:m e:m a d b:m a d4 e:m fis2
   b2:m e:m a d g e:m b4:m fis b2:m
 }
-%--------------------------------LYRICS--------------------------------
-text =  \lyricmode {
+
+%--------------------------------SŁOWA
+tekst = \lyricmode {
   Je -- zu, Tyś jest świa --  | tło -- ścią mej du -- szy,  |
   niech cie -- mność ma nie prze --  | ma -- wia do mnie już! |
   % 5
   Je -- zu, Tyś jest świa --  | tło -- ścią mej du -- szy,  |
   daj mi moc przy -- jąć  | dziś mi -- łość Twą.
 }
-stanzas = \markup {
-}
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-fourstaveschoir = {
+tekstSopranu = \tekst
+tekstAltu = \tekst
+tekstTenorow = \tekst
+tekstBasow = \tekst
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 17)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 8
+  markup-system-spacing #'basic-distance = 18
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 14
+}
+
+%--------------------------------STRUKTURA
+\score {
   \new ChoirStaff <<
-    \new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \sopranomelody
-      }
-    }
-    \new Lyrics \lyricsto soprano \text
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \altomelody
-      }
-    }
-    \new Lyrics \lyricsto alto \text
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \tenormelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto tenor \text
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \bassmelody
-      }
-    }
-    \new Lyrics \lyricsto alto \text
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
-
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \fourstaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \fourstaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas

@@ -1,25 +1,27 @@
-\version "2.17.25"
-#(ly:set-option 'strokeadjust #t)
+\version "2.19.3"
 
 \header	{
   title = "Wielkie i dziwne są dzieła Twoje"
+  subtitle = " "
   composer = "muzyka: ks. H. Markwica"
   arranger = "opracowanie: Łukasz Czerwiński, Jan Warchoł"
   poet = "słowa: por. Ap 15, 3-4"
 }
-%--------------------------------MELODIA
+
+%--------------------------------MUZYKA
 metrumitp = {
   \key g \major
   \time 2/4
-  \tempo 4=60
-  \set Score.tempoHideNote = ##t
+  \tempo Moderato 4=75
 }
+
 melodiaSopranu =
 \relative f' {
   \metrumitp
   g4 g8 g | fis4 fis | a a8 e | g8 ([fis8]) e4 |
   b'4 b4 | a4 a | a a4 | g4 fis |
-  g g8 g | d4 d | d d8 d | e4 e | \break
+  g g8 g | d4 d | d d8 d | e4 e |
+  \break
   % 13: Królu narodów...
   e2 | fis4. fis8 | g ([fis]) e4 ~ | e2 |
   e2 | fis4. fis8 | g ([fis]) e4 ~ | e2
@@ -58,16 +60,12 @@ melodiaBasow =
   r4 c4 | b4. b8 | g'8 ([fis8]) e4 ~ | e2
   \bar "|."
 }
+
+\include "input-shorthands/optional-chord/definitions.ily"
+
 akordy = \chordmode {
-  \set majorSevenSymbol = \markup { 7+ }
-  \override ParenthesesItem #'font-size = 0
   g2 d a:m e:m g d
-  a:m c4 d:7 g2 d b4:m
-  \once \override ChordName #'font-size = #-1 \parenthesize
-  g8
-  \once \override ChordName #'font-size = #-1 \parenthesize
-  d
-  e2:m
+  a:m c4 d:7 g2 d b4:m \optionalChord g8 \optionalChord d e2:m
   %Królu narodów
   c b:m7 e:m s2
   c:maj7 b:m7 e:m R
@@ -75,7 +73,7 @@ akordy = \chordmode {
 
 %--------------------------------SŁOWA
 tekst = \lyricmode {
-  \set stanza = "1. "
+  \set stanza = "1."
   Wiel -- kie i dziw -- ne są dzie -- ła Two -- je,
   Pa -- nie Bo -- że Wszech -- mo -- gą -- cy
   i spra -- wie -- dli -- we są dro -- gi Two -- je,
@@ -102,163 +100,39 @@ zwrotkaIII = \markup \column {
 }
 
 %--------------------------------USTAWIENIA
-
 #(set-global-staff-size 17)
 
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
 \paper {
-  indent = 2 \mm
-  short-indent = 2 \mm
-  left-margin = 15 \mm
-  right-margin = 15 \mm
   top-markup-spacing #'basic-distance = 8
   markup-system-spacing #'basic-distance = 18
   system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 15
-}
-
-#(define powiekszenie-zwrotek '(1.2 . 1.2))
-#(define interlinia '(baseline-skip . 3)) % 3 is Lily default
-odstepMiedzyZwrotkami = \markup \vspace #1
-odstepOdNumeruDoZwrotki = \markup \hspace #1
-
-\layout {
+  score-markup-spacing #'basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
 
 \score {
   \new ChoirStaff <<
-    \new ChordNames {
-      \germanChords
-      \set chordNameLowercaseMinor = ##t
-      \akordy
-    }
-    \new Staff = sopran
-    \with { \consists "Ambitus_engraver" } {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = sopran {
-        \set Voice.midiInstrument = "clarinet"
-        \dynamicUp
-        \tupletUp
-        \melodiaSopranu
-      }
-    }
+    \new ChordNames \akordy
+
+    \new SopranoVoice = sopran \melodiaSopranu
     \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = alt
-    \with { \consists "Ambitus_engraver" } {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alt {
-        \set Voice.midiInstrument = "english horn"
-        \dynamicUp
-        \tupletUp
-        \melodiaAltu
-      }
-    }
+    \new AltoVoice = alt \melodiaAltu
     \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = tenor
-    \with { \consists "Ambitus_engraver" } {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \set Voice.midiInstrument = "english horn"
-        \dynamicUp
-        \tupletUp
-        \melodiaTenorow
-      }
-    }
+    \new TenorVoice = tenor \melodiaTenorow
     \new Lyrics \lyricsto tenor \tekstTenorow
 
-    \new Staff = bas
-    \with { \consists "Ambitus_engraver" } {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bas {
-        \set Voice.midiInstrument = "clarinet"
-        \dynamicUp
-        \tupletUp
-        \melodiaBasow
-      }
-    }
+    \new BassVoice = bas \melodiaBasow
     \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
 
-\markup {
-  \fill-line {
-    \scale #powiekszenie-zwrotek {
-      \null
-
-      \override #interlinia
-      \column {
-        \line {
-          \bold
-          "2."
-          \odstepOdNumeruDoZwrotki
-          \zwrotkaII
-        }
-        \odstepMiedzyZwrotkami
-      }
-
-      \null
-
-      \override #interlinia
-      \column {
-        \line {
-          \bold
-          "3."
-          \odstepOdNumeruDoZwrotki
-          \zwrotkaIII
-        }
-        \odstepMiedzyZwrotkami
-      }
-
-      \null
-    }
-  }
-}
-
-%--------------------------------STOPKA
-
-\paper {
-  tagline = \markup {
-    \pad-to-box #'(0 . 0) #'(0 . 1.6)
-    \center-column {
-      \with-url
-      #"http://lilypond.org/"
-      \scale #'(0.75 . 0.75)
-      #(format #f "LilyPond v~a"
-         (lilypond-version)
-         )
-    }
-  }
-
-  oddFooterMarkup = \markup {
-    \override #'(baseline-skip . 1)
-    \column {
-      \fill-line {
-        %% Copyright header field only on first page in each bookpart.
-        \on-the-fly #part-first-page {
-          \override #'(baseline-skip . 2)
-          \center-column {
-            \scale #'(1 . 1)
-            \fromproperty #'header:copyright
-            \scale #'(0.85 . 0.85)
-            "skład nut: Jan Warchoł (jan.warchol@gmail.com, 509 078 203)"
-          }
-        }
-      }
-      \fill-line {
-        %% Tagline header field only on last page in the book.
-        \on-the-fly #last-page \fromproperty #'header:tagline
-      }
-    }
-  }
-}
+\markup \stanzas-in-two-columns { \zwrotkaII } { \zwrotkaIII }

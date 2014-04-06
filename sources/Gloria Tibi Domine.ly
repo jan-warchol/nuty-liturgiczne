@@ -3,33 +3,39 @@
   Albo może metrum jest inne? Jak to wpłynie na akompaniament?
   Czy obecny do dwóch głosów nie jest przekombinwowany?
 %}
+\version "2.19.3"
 
-\version "2.12.3"
-\pointAndClickOff
 \header	{
   title = "Gloria Tibi Domine"
   subtitle = "(kanon)"
+  subsubtitle = " "
   composer = "muzyka: Taizé"
 }
-commonprops = {
-  \autoBeamOff
+
+%--------------------------------MUZYKA
+melodia = \relative f' {
   \key c \major
   \time 4/4
-}
-scoretempomarker = {
   \tempo 4=100
   \set Score.tempoHideNote = ##t
-}
-%--------------------------------MELODY--------------------------------
-melody =	\relative c {
-  c4 c f f e c8 c c2 e c4 c g'4 g a a g e8 d c2 g a4 c
+
+  c4 c f f
+  e c8 c c2
+  e c4 c
+  g'4 g a a
+  g e8 d c2
+  g a4 c
   \bar "|."
 }
-%--------------------------------LYRICS--------------------------------
-text =  \lyricmode {
+akordy = \chordmode {
+}
+
+%--------------------------------SŁOWA
+tekst =  \lyricmode {
   Glo -- ri -- a Ti -- bi, Do -- mi -- ne, Do -- mi -- ne.
   Glo -- ri -- a Ti -- bi, Do -- mi -- ne, Do -- mi -- ne.
 }
+
 stanzas = \markup {
   \column {
     \typewriter \bold
@@ -42,40 +48,35 @@ stanzas = \markup {
     \line {"- dla trzech głosów:" \typewriter "C F C F C F C F C F C F (...) C"}
   }
 }
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-mainstructure = {
-  <<
-    \scoretempomarker
-    \new Staff {
-      \clef bass
-      \set Staff.midiInstrument = "clarinet"
-      \new Voice = solovoice {
-        \commonprops
-        \melody
-      }
-    }
-    \new Lyrics = solovoicelyrics \lyricsto solovoice \text
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 18)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  ragged-right = ##f
+  indent = 0
+  top-markup-spacing #'basic-distance = 10
+  markup-system-spacing #'basic-distance = 22
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 18
+}
+
+%--------------------------------STRUKTURA
+\score {
+  \new ChoirStaff <<
+    \new ChordNames \akordy
+    \new SopranoVoice = sopran \melodia
+    \new Lyrics \lyricsto sopran \tekst
   >>
-}
-
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \mainstructure
-  \midi {
-
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \mainstructure
   \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
+    \set Staff.instrumentName = ""
+    \set Staff.shortInstrumentName = ""
   }
+  \midi {}
 }
 
 \stanzas

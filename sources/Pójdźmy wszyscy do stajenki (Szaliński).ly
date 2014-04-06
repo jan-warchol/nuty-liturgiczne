@@ -1,21 +1,23 @@
-%{TODO:
-  sprawdzić akordy, szczególnie takt 7
-%}
+\version "2.19.3"
 
 \header	{
   title = "Pójdźmy wszyscy do stajenki"
+  subtitle = \markup \column { " " " " }
   arranger = "opracowanie: Wojciech Szaliński"
 }
-commonprops = {
-  \autoBeamOff
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key g \major
   \time 4/4
   \tempo 4=130
   \set Score.tempoHideNote = ##t
 }
-%--------------------------------MELODY--------------------------------
-sopranomelody = \relative c'' {
-  d,4 e d e |
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
+  d4 e d e |
   d4. g8 b4 g |
   d e d e |
   d4. g8 b4 g |
@@ -30,7 +32,9 @@ sopranomelody = \relative c'' {
   }
   \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   b,4 c b c |
   b4. d8 g4 d |
   b c b c |
@@ -46,7 +50,9 @@ altomelody = \relative f' {
   }
   \bar "|."
 }
-tenormelody = \relative c' {
+melodiaTenorow =
+\relative f {
+  \metrumitp
   g4 g g g |
   g4. b8 d4 b |
   g g g g |
@@ -62,14 +68,16 @@ tenormelody = \relative c' {
   }
   \bar "|."
 }
-bassmelody = \relative f {
+melodiaBasow =
+\relative f {
+  \metrumitp
   g4 g g g |
   g4. g8 g4 g |
   g g g g |
   g4. g8 g4 g |
   \repeat volta 2 {
-    d4 e8->[ fis->] g4 fis8[-> e]-> |
-    d4 e8->[ fis->] g4 g |
+    d4 e8->[\melisma fis->]\melismaEnd g4 fis8[->\melisma e]->\melismaEnd |
+    d4 e8->[\melisma fis->]\melismaEnd g4 g |
     a a g8[( fis]) e([ d)] |
   }
   \alternative {
@@ -78,145 +86,96 @@ bassmelody = \relative f {
   }
   \bar "|."
 }
+
+%{TODO:
+  sprawdzić akordy, szczególnie takt 7
+%}
+
 akordy = \chordmode {
-  \set chordNameLowercaseMinor = ##t
   g4 c g c g1
   g4 c g c g1
   \repeat volta 2 {
     c2 a:m b:m g d1
   }
-  \alternative { { g1 } { g } }
+  \alternative {
+    { g1 }
+    { g }
+  }
 }
-%--------------------------------LYRICS--------------------------------
-text =  \lyricmode {
-  \set stanza = "1. "
-  Pój -- dźmy wszy -- scy do sta -- jen -- ki, do Je -- zu -- sa i Pa -- nie -- nki,
-  po -- wi -- taj -- my Ma -- leń -- kie -- go i Ma -- ry -- ję, Ma -- tkę Je -- go,
+
+%--------------------------------SŁOWA
+tekst = \lyricmode {
+  \set stanza = "1."
+  Pój -- dźmy wszy -- scy do sta -- jen -- ki,
+  do Je -- zu -- sa i Pa -- nie -- nki,
+  \break
+  po -- wi -- taj -- my Ma -- leń -- kie -- go
+  i Ma -- ry -- ję, Ma -- tkę Je -- go,
   Ma -- tkę Je -- go.
 }
-stanzas = \markup {
-  \fill-line {
-    \large {
-      \hspace #0.1
-      \column {
-        \line {
-          "2. "
-          \column	{
-            "Witaj, Jezu ukochany, od patriarchów czekany,"
-            "Od proroków ogłoszony, od narodów upragniony!"
-          }
-        }
-        \hspace #0.1
-        \line {
-          "3. "
-          \column {
-            "Witaj, Dziecineczko w żłobie, wyznajemy Boga w Tobie,"
-            "Coś się narodził tej nocy, byś nas wyrwał z czarta mocy!"
-          }
-        }
-        \hspace #0.1
-        \line {
-          "4. "
-          \column {
-            "Witaj, Jezu nam zjawiony, witaj, dwakroć narodzony,"
-            "Raz z Ojca przed wieków wiekiem, a teraz z Matki człowiekiem."
-          }
-        }
-        \hspace #0.1
-        \line {
-          "5. "
-          \column {
-            "Któż to słyszał takie dziwy, Tyś człowiek i Bóg prawdziwy,"
-            "Ty łączysz w Boskiej Osobie dwie natury różne sobie."
 
-          }
-        }
-      }
-      \hspace #0.1
-    }
-  }
+tekstSopranu = \tekst
+tekstAltu = \tekst
+tekstTenorow = \tekst
+tekstBasow = \tekst
+
+zwrotkaII = \markup \column {
+  "Witaj, Jezu ukochany, od patriarchów czekany,"
+  "Od proroków ogłoszony, od narodów upragniony!"
 }
-%--------------------------------ALL-FILE VARIABLE--------------------------------
+zwrotkaIII = \markup \column {
+  "Witaj, Dziecineczko w żłobie, wyznajemy Boga w Tobie,"
+  "Coś się narodził tej nocy, byś nas wyrwał z czarta mocy!"
+}
+zwrotkaIV = \markup \column {
+  "Witaj, Jezu nam zjawiony, witaj, dwakroć narodzony,"
+  "Raz z Ojca przed wieków wiekiem, a teraz z Matki człowiekiem."
+}
+zwrotkaV = \markup \column {
+  "Któż to słyszał takie dziwy, Tyś człowiek i Bóg prawdziwy,"
+  "Ty łączysz w Boskiej Osobie dwie natury różne sobie."
+}
 
-fourstaveschoir = {
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 17)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 10
+  markup-system-spacing #'basic-distance = 20
+  system-system-spacing #'basic-distance = 20
+  score-markup-spacing #'basic-distance = 18
+}
+
+%--------------------------------STRUKTURA
+\score {
   \new ChoirStaff <<
-    \new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \sopranomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto soprano \text
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \altomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto soprano \text
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \tenormelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto tenor \text
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \bassmelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto bass \text
-
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
 
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \fourstaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
+\markup
+\override #'(stanza-vdist . 1.5)
+\stanzas-in-one-column {
+  \zwrotkaII
+  \zwrotkaIII
+  \zwrotkaIV
+  \zwrotkaV
 }
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \fourstaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas

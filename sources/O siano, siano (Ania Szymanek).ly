@@ -1,27 +1,21 @@
-\version "2.10.33"
-\paper
-{
-  system-count = #3
-}
-#(set-global-staff-size 19)		% default staff size is 20
-\header
-{
+\version "2.19.3"
+
+\header	{
   title = "O siano, siano"
-  arranger = "aranżacja: Anna Szymanek"
+  subtitle = \markup \column { " " " " " " }
+  arranger = "opracowanie: Anna Szymanek"
 }
-staffprops =
-{
-  \autoBeamOff
-  \set Staff.midiInstrument = "clarinet"
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key f \major
   \time 3/4
-  \override Score.MetronomeMark #'extra-offset = #'( -7.0 . 2.4 )
-  \override Score.MetronomeMark #'transparent = ##t
   \tempo 4=80
+  \set Score.tempoHideNote = ##t
 }
-%--------------------------------MELODY--------------------------------
-sopranomelody =
-\relative c'' {
+melodiaSopranu =
+\relative f' {
+  \metrumitp
   a4 a bes |
   d8([ c]) c2 |
   c4 \melisma d2 |
@@ -49,19 +43,21 @@ sopranomelody =
   f,8[( g]) a4 bes |
   d4 c2 |
   d8 c bes4. e,8 |
-  g4 f2	\bar "|."
+  g4 f2
+  \bar "|."
 }
-altomelody =
-\relative c' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   e4 e d |
   f8([ e]) e2 |
-  g4 f2 |
-  d4 f2 |
+  g4\melisma f2 |
+  d4 f2\melismaEnd |
   %-=5=-
   e4 e d |
   f8([ e]) e2 |
-  e4 f2 |
-  g4 f2 |
+  e4\melisma f2 |
+  g4 f2\melismaEnd |
   e4 e c8[( g']) |
   %-=10=-
   g4 f2 |
@@ -80,13 +76,15 @@ altomelody =
   c8[( bes]) c4 f |
   a4 g2 |
   d8 e f4 f8[( e]) |
-  e4 f2	\bar "|."
+  e4 f2
+  \bar "|."
 }
-tenormelody =
-\relative c' {
+melodiaTenorow =
+\relative f {
+  \metrumitp
   R1*3/4
   R1*3/4
-  c8 c bes4. g8 |
+  c'8 c bes4. g8 |
   bes4 a2 |
   %-=5=-
   c2 \melisma bes4~ |
@@ -111,17 +109,19 @@ tenormelody =
   f8[( d])f4 d |
   d4 e2 |
   f8 a d4. bes8 |
-  bes4 c2 \bar"|."
+  bes4 c2
+  \bar "|."
 }
-bassmelody =
-\relative c {
+melodiaBasow =
+\relative f {
+  \metrumitp
   R1*3/4
   R1*3/4
   e8 e d4 d |
   g4 f2 |
   %-=5=-
-  f2 e4 |
-  f8[ g] e2 |
+  f2\melisma e4 |
+  f8[ g] e2\melismaEnd |
   g8 f d4 g |
   g4 f2 |
   e4 g e |
@@ -142,104 +142,70 @@ bassmelody =
   f4 c d |
   d4 c2 |
   d8 c bes4 d8[( e]) |
-  g4 f2 \bar"|."
+  g4 f2
+  \bar "|."
 }
-%--------------------------------LYRICS--------------------------------
-femalelyrics =  \lyricmode
-{
-  \set stanza = "1. "
+
+akordy = \chordmode {
+}
+
+%--------------------------------SŁOWA
+tekstSopranu = \lyricmode {
+  \set stanza = "1."
   Ślicz -- na Pa -- nien -- ka a __ w_staj -- ni po -- wi -- wszy a __
   O sia -- no, sia -- no, sia -- no jak li -- li -- ja, na któ -- rym kła -- dzie Je -- zu -- sa Ma -- ry -- ja.
   O sia -- no, sia -- no, sia -- no jak li -- li -- ja, na któ -- rym kła -- dzie Je -- zu -- sa Ma -- ry -- ja.
 }
-malelyrics = \lyricmode
+tekstAltu = \tekstSopranu
+
+tekstTenorow = \lyricmode
 {
   \set stanza = "1."
   Je -- zu -- sa zro -- dzi -- ła, a __ sian -- kiem Go o -- kry -- ła.
   O sia -- no, sia -- no, sia -- no jak li -- li -- ja, na któ -- rym kła -- dzie Je -- zu -- sa Ma -- ry -- ja.
   O sia -- no, sia -- no, sia -- no jak li -- li -- ja, na któ -- rym kła -- dzie Je -- zu -- sa Ma -- ry -- ja.
 }
-%--------------------------------ALL-FILE VARIABLE--------------------------------
-everything =
-{
-  \new ChoirStaff
-  <<
-    \new Staff = soprano
-    {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano
-      {
-        \staffprops
-        \sopranomelody
-      }
-    }
-    \new Lyrics = soprano \lyricsto soprano \femalelyrics
-    \new Staff = alto
-    {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto
-      {
-        \staffprops
-        \altomelody
-      }
-    }
-    \new Lyrics = soprano \lyricsto soprano \femalelyrics
-    \new Staff = tenor
-    {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor
-      {
-        \staffprops
-        \tenormelody
-      }
-    }
-    \new Lyrics = tenor \lyricsto tenor \malelyrics
-    \new Staff = bass
-    {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass
-      {
-        \staffprops
-        \bassmelody
-      }
-    }
-    \new Lyrics = tenor \lyricsto tenor \malelyrics
+tekstBasow = \tekstTenorow
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 16.5)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 10
+  markup-system-spacing #'basic-distance = 18
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 14
+}
+
+\layout {
+  \context
+  {
+    \Lyrics
+    \override LyricSpace #'minimum-distance = #0.8
+  }
+}
+%--------------------------------STRUKTURA
+
+\score {
+  \new ChoirStaff <<
+    \new ChordNames \akordy
+
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
+
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
+
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
-}
-%--------------------------------SCORE-LAYOUT--------------------------------
-\score
-{
-  \everything
-  \layout
-  {
-    \context
-    {
-      \Lyrics
-      \override LyricSpace #'minimum-distance = #0.8
-    }
-    indent = 0\cm
-  }
-}
-%--------------------------------SCORE-MIDI--------------------------------
-\score
-{
-  \unfoldRepeats
-  {
-    \everything
-  }
-  \midi
-  {
-    \context
-    {
-      \Score
-    }
-  }
+  \layout {}
+  \midi {}
 }

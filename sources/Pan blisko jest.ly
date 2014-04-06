@@ -1,27 +1,23 @@
-\version "2.12.3"
-\pointAndClickOff
+\version "2.19.3"
+
 \header	{
   title = "Pan blisko jest"
   subtitle = "(ostinato)"
-  arranger = "opracowanie: Taize"
+  subsubtitle = " "
+  arranger = "opracowanie: Taizé"
 }
-commonprops = {
-  \autoBeamOff
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key e \minor
   \time 2/2
-}
-scoretempomarker = {
   \tempo 4=100
   \set Score.tempoHideNote = ##t
 }
-#(set-global-staff-size 20)
-\paper {
-  line-width = 176
-  top-markup-spacing #'basic-distance = 12
-  system-system-spacing #'basic-distance = 18
-}
-%--------------------------------MELODY--------------------------------
-sopranomelody =	\relative c'' {
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
   g2 g4. e8 |
   g2 r4 g |
   fis2 fis |
@@ -30,9 +26,11 @@ sopranomelody =	\relative c'' {
   b2 r4 b |
   c2 b |
   e,2. r4
-  \bar ":|"
+  \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   e2 e4. e8 |
   e2 r4 e |
   e2 e |
@@ -41,105 +39,82 @@ altomelody = \relative f' {
   g2 r4 g |
   e2 dis |
   e2. r4
+  \bar "|."
 }
-tenormelody = \relative c' {
-  b2 b4. b8 c2 r4 c c2 c b2. r4 |
-  b2 d4. d8 d2 r4 g, a( g) fis2 g2. r4
+melodiaTenorow =
+\relative f {
+  \metrumitp
+  b2 b4. b8
+  c2 r4 c
+  c2 c
+  b2. r4 |
+  b2 d4. d8
+  d2 r4 g,
+  a( g) fis2
+  g2. r4
+  \bar "|."
 }
-bassmelody = \relative f {
-  e2 e4. e8 c2 r4 c a2 a b2. r4 |
-  e2 d4. d8 g2 r4 e a,2 b e2. r4
+melodiaBasow =
+\relative f {
+  \metrumitp
+  e2 e4. e8
+  c2 r4 c
+  a2 a
+  b2. r4 |
+  e2 d4. d8
+  g2 r4 e
+  a,2 b
+  e2. r4
+  \bar "|."
 }
-akordy = \chordmode {
 
+akordy = \chordmode {
 }
-%--------------------------------LYRICS--------------------------------
-text =  \lyricmode {
+
+%--------------------------------SŁOWA
+tekst = \lyricmode {
   Pan bli -- sko jest, o -- cze -- kuj Go.
   Pan bli -- sko jest, w_Nim ser -- ca moc.
 }
-stanzas = \markup {
-}
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-fourstaveschoir = {
+tekstSopranu = \tekst
+tekstAltu = \tekst
+tekstTenorow = \tekst
+tekstBasow = \tekst
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 18)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 10
+  markup-system-spacing #'basic-distance = 18
+  system-system-spacing #'basic-distance = 18
+  score-markup-spacing #'basic-distance = 14
+  left-margin = 25 \mm
+  right-margin = 25 \mm
+}
+
+%--------------------------------STRUKTURA
+\score {
   \new ChoirStaff <<
-    \scoretempomarker
-    %	\new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \sopranomelody
-      }
-    }
-    \new Lyrics = sopranolyrics \lyricsto soprano \text
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \altomelody
-      }
-    }
-    \new Lyrics = altolyrics \lyricsto alto \text
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \tenormelody
-      }
-    }
-    \new Lyrics = tenorlyrics \lyricsto tenor \text
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \bassmelody
-      }
-    }
-    \new Lyrics = basslyrics \lyricsto bass \text
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
-
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \fourstaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \fourstaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas

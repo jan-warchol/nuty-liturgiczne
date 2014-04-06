@@ -1,22 +1,24 @@
-\version "2.12.3"
-\pointAndClickOff
+\version "2.19.3"
+
 \header	{
   title = "Łaska Pana"
   subtitle = "(ostinato)"
+  subsubtitle = " "
   composer = "Piotr Pałka"
 }
-commonprops = {
-  \autoBeamOff
+
+%--------------------------------MUZYKA
+metrumitp = {
   \key d \major
   \time 4/4
-}
-scoretempomarker = {
   \tempo 4=80
   \set Score.tempoHideNote = ##t
 }
-%--------------------------------MELODY--------------------------------
-sopranomelody = \relative c'' {
-  \partial 8 e,8
+
+melodiaSopranu =
+\relative f' {
+  \metrumitp
+  \partial 8 e8
   \repeat volta 2 {
     fis4. g8 a4 e
     d8 fis e d e2
@@ -25,9 +27,12 @@ sopranomelody = \relative c'' {
   \alternative {
     { g8[( fis)] e d a'4. e8 }
     { g8[( fis)] e8. d16 d4. r8 }
-  } \bar "|."
+  }
+  \bar "|."
 }
-altomelody = \relative f' {
+melodiaAltu =
+\relative f' {
+  \metrumitp
   \partial 8 cis8
   \repeat volta 2 {
     d4. d8 e4 d8[( cis])
@@ -37,9 +42,12 @@ altomelody = \relative f' {
   \alternative {
     { d4 b8 b cis4. cis8 }
     { d4 d8[( cis16)] cis d4. r8 }
-  } \bar "|."
+  } 
+  \bar "|."
 }
-tenormelody = \relative c' {
+melodiaTenorow =
+\relative f {
+  \metrumitp
   \partial 8 a8
   \repeat volta 2 {
     a4. b8 a4 a8([ g)]
@@ -49,9 +57,12 @@ tenormelody = \relative c' {
   \alternative {
     { b8([ a)] g g e4. a8 }
     { b8([ a)] b[( a16)] a a4. r8 }
-  } \bar "|."
+  } 
+  \bar "|."
 }
-bassmelody = \relative f {
+melodiaBasow =
+\relative f {
+  \metrumitp
   \partial 8 a,8
   \repeat volta 2 {
     d4. d8 cis4 b8([ a)]
@@ -61,101 +72,70 @@ bassmelody = \relative f {
   \alternative {
     { e4 e8 e a,4. a8 }
     { e'8[( fis]) g[( a16)] a d,4. r8 }
-  } \bar "|."
+  } 
+  \bar "|."
 }
+
+%{
+czy to w ogóle jest harmonizowalne?
+A może akordy powinny być takie: 
+A D A h7 e7 G A 
+cis zmniejszony z septymą małą D e A e (e) D?
+%}
 akordy = \chordmode {
   a8
-  \repeat volta 2 { d2 a b4:m7 e:m a2 e:m6 d }
-  \alternative { { e:m a } { e4:m7 g d2 } }
+  \repeat volta 2 {
+    d2 a b4:m7 e:m a2 e:m6 d 
+  }
+  \alternative {
+    { e:m a }
+    { e4:m7 g d2 } 
+  }
 }
-%--------------------------------LYRICS--------------------------------
-text =  \lyricmode {
+
+%--------------------------------SŁOWA
+tekst = \lyricmode {
   Niech nas o -- gar -- nie ła -- ska Pa -- nie Twa,
   Duch Twój Świę -- ty niech do -- tknie nas. Niech
   niech do -- tknie nas.
 }
-stanzas = \markup {
-}
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-fourstaveschoir = {
+tekstSopranu = \tekst
+tekstAltu = \tekst
+tekstTenorow = \tekst
+tekstBasow = \tekst
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 17)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 8
+  markup-system-spacing #'basic-distance = 18
+  system-system-spacing #'basic-distance = 20
+  score-markup-spacing #'basic-distance = 14
+}
+
+%--------------------------------STRUKTURA
+\score {
   \new ChoirStaff <<
-    \scoretempomarker
-    %	\new ChordNames { \germanChords \akordy }
-    \new Staff = soprano {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = soprano {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \sopranomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto soprano \text
+    \new ChordNames \akordy
 
-    \new Staff = alto {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \altomelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto alto \text
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
 
-    \new Staff = tenor {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor {
-        \commonprops
-        \set Voice.midiInstrument = "english horn"
-        \tenormelody
-      }
-    }
-    \new Lyrics = menlyrics \lyricsto tenor \text
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
 
-    \new Staff = bass {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass {
-        \commonprops
-        \set Voice.midiInstrument = "clarinet"
-        \bassmelody
-      }
-    }
-    \new Lyrics = womenlyrics \lyricsto bass \text
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
+  \layout {}
+  \midi {}
 }
-
-%---------------------------------MIDI---------------------------------
-\score {
-  \unfoldRepeats \fourstaveschoir
-  \midi {
-    \context {
-      \Staff \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-      \remove "Dynamic_performer"
-    }
-  }
-}
-
-%--------------------------------LAYOUT--------------------------------
-\score {
-  \fourstaveschoir
-  \layout {
-    indent = 0\cm
-    \context {
-      \Staff \consists "Ambitus_engraver"
-    }
-  }
-}
-
-\stanzas

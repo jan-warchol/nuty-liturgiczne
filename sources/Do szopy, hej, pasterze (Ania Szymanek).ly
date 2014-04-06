@@ -1,27 +1,27 @@
-\version "2.10.33"
+\version "2.19.3"
+
+\header	{
+  title = "Do szopy, hej, pasterze"
+  subtitle = " "
+  arranger = "opracowanie: Anna Szymanek"
+}
+
+%--------------------------------MUZYKA
+metrumitp = {
+  \key f \major
+  \time 3/4
+  \tempo 4=120
+  \set Score.tempoHideNote = ##t
+}
+
 \paper
 {
   system-count = #3
 }
-#(set-global-staff-size 17)		% default staff size is 20
-\header
-{
-  title = "Do szopy, hej, pasterze"
-  arranger = "aranżacja: Anna Szymanek"
-}
-staffprops =
-{
-  \autoBeamOff
-  \set Staff.midiInstrument = "clarinet"
-  \key f \major
-  \time 3/4
-  \override Score.MetronomeMark #'extra-offset = #'( -7.0 . 2.4 )
-  \override Score.MetronomeMark #'transparent = ##t
-  \tempo 4=120
-}
-%--------------------------------MELODY--------------------------------
-firstsopranomelody =
+
+melodiaSolo =
 \relative c'' {
+  \metrumitp
   \partial 4 c4 f2.
   e2 e4
   d2.
@@ -43,8 +43,9 @@ firstsopranomelody =
   f2 r4
   \bar "|."
 }
-secondsopranomelody =
+melodiaSopranu =
 \relative c'' {
+  \metrumitp
   \partial 4 c4 c bes bes8 a
   bes4 a c
   d c c8 c
@@ -66,8 +67,9 @@ secondsopranomelody =
   a2 r4
   \bar "|."
 }
-altomelody =
+melodiaAltu =
 \relative c' {
+  \metrumitp
   \partial 4 c4 f f g8 f
   e4 e c
   g' g a8 g
@@ -89,8 +91,9 @@ altomelody =
   f2 r4
   \bar "|."
 }
-tenormelody =
+melodiaTenorow =
 \relative c' {
+  \metrumitp
   \partial 4 c4 a bes d8 c
   g4 a f
   g c a8 c
@@ -112,8 +115,9 @@ tenormelody =
   c2 r4
   \bar "|."
 }
-bassmelody =
+melodiaBasow =
 \relative c {
+  \metrumitp
   \partial 4 c4 f d d8 f
   e4 c a
   bes e e8 c
@@ -135,115 +139,64 @@ bassmelody =
   f2 r4
   \bar "|."
 }
-%--------------------------------LYRICS--------------------------------
-firstsopranolyrics =  \lyricmode
-{
-  \set stanza = "1. "
+
+akordy = \chordmode {
+}
+
+%--------------------------------SŁOWA
+soloTekst = \lyricmode {
+  \set stanza = "1."
   Do szo -- py, pa -- ste -- rze, by zba -- wić lu -- dzki ród!
   Śpie -- waj -- cie, pa -- ste -- rze graj -- cie Mu, nie zbudź -- cie Go ze snu!
 }
-otherslyrics =  \lyricmode
-{
-  \set stanza = "1. "
+chorTekst = \lyricmode {
+  \set stanza = "1."
   Do szo -- py, hej, pa -- ste -- rze, do szo -- py, bo tam cud!
   Syn Bo -- ży w_żło -- bie le -- ży, by zba -- wić lu -- dzki ród!
   Śpie -- waj -- cie a -- nio -- ło -- wie, pa -- ste -- rze graj -- cie Mu,
   kła -- niaj -- cie się kró -- lo -- wie, nie zbudź -- cie Go ze snu!
 }
-%--------------------------------ALL-FILE VARIABLE--------------------------------
 
-everything =
-{
-  \new ChoirStaff
-  <<
-    \new Staff = firstsoprano
-    {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = firstsoprano
-      {
-        \staffprops
-        \firstsopranomelody
-      }
-    }
-    \new Lyrics = firstsoprano \lyricsto firstsoprano \firstsopranolyrics
-    \new Staff = secondsoprano
-    {
-      \clef treble
-      \set Staff.instrumentName = "S "
-      \set Staff.shortInstrumentName = "S "
-      \new Voice = secondsoprano
-      {
-        \staffprops
-        \secondsopranomelody
-      }
-    }
-    \new Lyrics = secondsoprano \lyricsto secondsoprano \otherslyrics
-    \new Staff = alto
-    {
-      \clef treble
-      \set Staff.instrumentName = "A "
-      \set Staff.shortInstrumentName = "A "
-      \new Voice = alto
-      {
-        \staffprops
-        \altomelody
-      }
-    }
-    \new Lyrics = secondsoprano \lyricsto secondsoprano \otherslyrics
-    \new Staff = tenor
-    {
-      \clef "treble_8"
-      \set Staff.instrumentName = "T "
-      \set Staff.shortInstrumentName = "T "
-      \new Voice = tenor
-      {
-        \staffprops
-        \tenormelody
-      }
-    }
-    \new Lyrics = tenor \lyricsto tenor \otherslyrics
-    \new Staff = bass
-    {
-      \clef bass
-      \set Staff.instrumentName = "B "
-      \set Staff.shortInstrumentName = "B "
-      \new Voice = bass
-      {
-        \staffprops
-        \bassmelody
-      }
-    }
-    \new Lyrics = secondsoprano \lyricsto secondsoprano \otherslyrics
+tekstSopranu = \chorTekst
+tekstAltu = \chorTekst
+tekstTenorow = \chorTekst
+tekstBasow = \chorTekst
+
+%--------------------------------USTAWIENIA
+#(set-global-staff-size 16.5)
+
+\include "templates/predefined-instruments/instrument-context-definitions.ily"
+\include "templates/adjustable-centered-stanzas/definitions.ily"
+\include "ustawienia.ily"
+
+\paper {
+  top-markup-spacing #'basic-distance = 7
+  markup-system-spacing #'basic-distance = 18
+  system-system-spacing #'basic-distance = 18
+  last-bottom-spacing #'basic-distance = 18
+}
+
+%--------------------------------STRUKTURA
+
+\score {
+  \new ChoirStaff <<
+    \new ChordNames \akordy
+
+    \new SopranoVoice = solo \melodiaSolo
+    \new Lyrics \lyricsto solo \soloTekst
+
+    \new SopranoVoice = sopran \melodiaSopranu
+    \new Lyrics \lyricsto sopran \tekstSopranu
+
+    \new AltoVoice = alt \melodiaAltu
+    \new Lyrics \lyricsto alt \tekstAltu
+
+    \new TenorVoice = tenor \melodiaTenorow
+    \new Lyrics \lyricsto tenor \tekstTenorow
+
+    \new BassVoice = bas \melodiaBasow
+    \new Lyrics \lyricsto bas \tekstBasow
   >>
-}
-%--------------------------------SCORE-LAYOUT--------------------------------
-\score
-{
-  \everything
-  \layout
-  {
-    \context
-    {
-      \Lyrics
-      \override LyricSpace #'minimum-distance = #0.8
-    }
-    indent = 0\cm
-  }
-}
-%--------------------------------SCORE-MIDI--------------------------------
-\score
-{
-  \unfoldRepeats
-  {
-    \everything
-  }
-  \midi
-  {
-    \context
-    {
-      \Score
-    }
-  }
+  \layout {}
+  \midi {}
 }
