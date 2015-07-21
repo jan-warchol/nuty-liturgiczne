@@ -107,9 +107,10 @@ zwrotkaIII = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
+  system-count = 3
   top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 18
+  markup-system-spacing #'basic-distance = 16
+  system-system-spacing #'basic-distance = 17
   score-markup-spacing #'basic-distance = 14
 }
 
@@ -135,4 +136,4 @@ zwrotkaIII = \markup \column {
   \midi {}
 }
 
-\markup \stanzas-in-two-columns { \zwrotkaII } { \zwrotkaIII }
+\markup \stanzas-in-columns #2 { \zwrotkaII \zwrotkaIII }

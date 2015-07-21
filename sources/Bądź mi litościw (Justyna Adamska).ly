@@ -166,5 +166,6 @@ zwrotkaV = \markup \column {
 }
 
 \markup
-\override #'(stanza-vdist . 2)
-\stanzas-in-two-columns { \zwrotkaII \zwrotkaIII } { \zwrotkaIV \zwrotkaV }
+\override #'(column-count . 2)
+\override #'(vertical-spacing . 2)
+\stanzas { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

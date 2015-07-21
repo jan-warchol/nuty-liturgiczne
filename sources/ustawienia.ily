@@ -4,8 +4,8 @@
 \paper {
   indent = 2 \mm
   short-indent = 2 \mm
-  left-margin = 15 \mm
-  right-margin = 15 \mm
+  left-margin = 10 \mm
+  right-margin = 10 \mm
 }
 
 \paper {
@@ -28,6 +28,10 @@
     \germanChords
     chordNameLowercaseMinor = ##t
     majorSevenSymbol = \markup { 7+ }
+  }
+  \context {
+    \VocalStaff
+    \remove "Ambitus_engraver"
   }
   \context {
     \SopranoStaff
