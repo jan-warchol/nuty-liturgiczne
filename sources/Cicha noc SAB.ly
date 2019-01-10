@@ -131,10 +131,10 @@ zwrotkaIII = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 24
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 16
+  top-markup-spacing.basic-distance = 8
+  markup-system-spacing.basic-distance = 24
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 16
   left-margin = 20 \mm
   right-margin = 20 \mm
 }

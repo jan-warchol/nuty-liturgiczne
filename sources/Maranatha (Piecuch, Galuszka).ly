@@ -155,10 +155,10 @@ zwrotkaIV = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 5
-  markup-system-spacing #'padding = -3
-  system-system-spacing #'basic-distance = 17
-  score-markup-spacing #'basic-distance = 17
+  top-markup-spacing.basic-distance = 5
+  markup-system-spacing.padding = -3
+  system-system-spacing.basic-distance = 17
+  score-markup-spacing.basic-distance = 17
   top-margin = 12 \mm
   bottom-margin = 10 \mm
   ragged-last-bottom = ##f

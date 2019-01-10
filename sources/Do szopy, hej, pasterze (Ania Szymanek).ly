@@ -170,10 +170,10 @@ tekstBasow = \chorTekst
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 7
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 18
-  last-bottom-spacing #'basic-distance = 18
+  top-markup-spacing.basic-distance = 7
+  markup-system-spacing.basic-distance = 18
+  system-system-spacing.basic-distance = 18
+  last-bottom-spacing.basic-distance = 18
 }
 
 %--------------------------------STRUKTURA

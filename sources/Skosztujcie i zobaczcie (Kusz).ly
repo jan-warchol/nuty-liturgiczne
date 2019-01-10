@@ -125,10 +125,10 @@ zwrotkaV = \markup \column {
 
 \paper {
   system-count = #3
-  top-markup-spacing #'basic-distance = 5
-  markup-system-spacing #'padding = 0
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 5
+  markup-system-spacing.padding = 0
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA

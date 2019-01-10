@@ -144,10 +144,10 @@ zwrotkaV = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 10
-  markup-system-spacing #'basic-distance = 20
-  system-system-spacing #'basic-distance = 20
-  score-markup-spacing #'basic-distance = 18
+  top-markup-spacing.basic-distance = 10
+  markup-system-spacing.basic-distance = 20
+  system-system-spacing.basic-distance = 20
+  score-markup-spacing.basic-distance = 18
 }
 
 %--------------------------------STRUKTURA

@@ -82,9 +82,9 @@ tlumaczenie = \markup {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 10
-  system-system-spacing #'basic-distance = 20
-  score-markup-spacing #'basic-distance = 18
+  top-markup-spacing.basic-distance = 10
+  system-system-spacing.basic-distance = 20
+  score-markup-spacing.basic-distance = 18
   left-margin = 25 \mm
   right-margin = 25 \mm
 }

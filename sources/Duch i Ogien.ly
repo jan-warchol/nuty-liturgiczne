@@ -94,10 +94,10 @@ trzeciaZwrotka = \lyricmode {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 10
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 20
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 10
+  markup-system-spacing.basic-distance = 18
+  system-system-spacing.basic-distance = 20
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
@@ -116,17 +116,17 @@ trzeciaZwrotka = \lyricmode {
     >>
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing #'padding = #1
+      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \tekst
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing #'padding = #1
+      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \drugaZwrotka
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing #'padding = #1
+      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \trzeciaZwrotka
 

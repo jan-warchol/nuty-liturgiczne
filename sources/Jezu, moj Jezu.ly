@@ -57,10 +57,10 @@ zwrotkaIV = \markup \column {
   system-count = 2
   indent = 0
   short-indent = 0
-  top-markup-spacing #'basic-distance = 10
-  markup-system-spacing #'basic-distance = 22
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 18
+  top-markup-spacing.basic-distance = 10
+  markup-system-spacing.basic-distance = 22
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 18
 }
 
 %--------------------------------STRUKTURA
