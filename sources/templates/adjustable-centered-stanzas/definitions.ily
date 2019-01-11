@@ -10,9 +10,14 @@ podzielNaKolumny = #(define-scheme-function
     (append (list (list-head lista-zwrotek wysokosc-kolumny)) (podzielNaKolumny (list-tail lista-zwrotek wysokosc-kolumny) (- liczbaKolumn 1)) )))))
 
 
-zwrotki = #(define-scheme-function
-    (parser location liczbaKolumn counter powiekszenie interlinia odstepMiedzyZwrotkami odstepOdNumeruDoZwrotki lista-zwrotek)
-    ((number? 2) (number? 2) (number? 1.1) (number? 3) (number? 2) (number? 1) markup-list?)
+zwrotki = #(define-markup-command
+    (parser location liczbaKolumn lista-zwrotek)
+    ((number? 2) markup-list?)
+    #:properties ((counter 2)
+                 (powiekszenie 1.1)
+                 (interlinia 3)
+                 (odstepMiedzyZwrotkami 2)
+                 (odstepOdNumeruDoZwrotki 1))
   (let* ((kolumna-markup (define-scheme-function
     (parser location lista-zwrotek)
     (markup-list?)
