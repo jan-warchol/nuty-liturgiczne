@@ -206,5 +206,5 @@ zwrotkaIV = \markup \column {
 }
 
 \markup {
-\override #'(odstepOdNumeruDoZwrotki . 0.5)
-\zwrotki #3 \markuplist { \zwrotkaII \zwrotkaIII \zwrotkaIV } }
+  \override #'(odstepOdNumeruDoZwrotki . 0.5)
+  \zwrotki #3 { \zwrotkaII \zwrotkaIII \zwrotkaIV } }

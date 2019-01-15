@@ -10,9 +10,8 @@ podzielNaKolumny = #(define-scheme-function
     (append (list (list-head lista-zwrotek wysokosc-kolumny)) (podzielNaKolumny (list-tail lista-zwrotek wysokosc-kolumny) (- liczbaKolumn 1)) )))))
 
 
-zwrotki = #(define-markup-command
-    (parser location liczbaKolumn lista-zwrotek)
-    ((number? 2) markup-list?)
+#(define-markup-command (zwrotki layout props liczbaKolumn lista-zwrotek)
+    (number? markup-list?)
     #:properties ((counter 2)
                  (powiekszenie 1.1)
                  (interlinia 3)
@@ -37,7 +36,8 @@ zwrotki = #(define-markup-command
             
             ))}
     #})))
-  #{ \markup {
+  (interpret-markup layout props
+    #{ \markup {
       \fill-line
         \scale #`(,powiekszenie . ,powiekszenie)
         #(append (list #{\markup \null #}) 
@@ -48,4 +48,4 @@ zwrotki = #(define-markup-command
             )) (podzielNaKolumny lista-zwrotek liczbaKolumn)
             )))
 
-   }#}))
+   }#})))
