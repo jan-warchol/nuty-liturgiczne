@@ -153,6 +153,6 @@ zwrotkaV = \markup \column {
 }
 
 \markup
-\override #'(line-spacing . 0.85)
-\override #'(stanza-vdist . 0.55)
-\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
+\override #'(interlinia . 0.85)
+\override #'(odstepMiedzyZwrotkami . 0.55)
+\zwrotki #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

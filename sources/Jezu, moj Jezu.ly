@@ -78,5 +78,5 @@ zwrotkaIV = \markup \column {
 }
 
 \markup
-\override #'(stanza-vdist . 1.5)
-\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV }
+\override #'(odstepMiedzyZwrotkami . 1.5)
+\zwrotki #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV }

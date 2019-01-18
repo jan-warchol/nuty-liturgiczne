@@ -116,17 +116,17 @@ trzeciaZwrotka = \lyricmode {
     >>
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
+      \override VerticalAxisGroup.nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \tekst
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
+      \override VerticalAxisGroup.nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \drugaZwrotka
     \new Lyrics \with {
       \override VerticalAxisGroup #'staff-affinity = #CENTER
-      \override VerticalAxisGroup #'nonstaff-relatedstaff-spacing.padding = #1
+      \override VerticalAxisGroup.nonstaff-relatedstaff-spacing.padding = #1
     }
     \lyricsto alto \trzeciaZwrotka
 

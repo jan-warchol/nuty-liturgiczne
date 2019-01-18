@@ -184,8 +184,8 @@ zwrotkaIV = \markup \column {
 }
 
 \markup
-\override #'(stanza-vdist . 0.9)
-\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV }
+\override #'(odstepMiedzyZwrotkami . 0.9)
+\zwrotki #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV }
 
 %{
   \new RhythmicStaff {

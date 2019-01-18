@@ -212,4 +212,4 @@ zwrotkaV = \markup \column {
   \midi {}
 }
 
-\markup \stanzas-in-two-columns { \zwrotkaII \zwrotkaIII } { \zwrotkaIV \zwrotkaV }
+\markup \zwrotki #2 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

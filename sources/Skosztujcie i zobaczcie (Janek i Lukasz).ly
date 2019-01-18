@@ -153,5 +153,5 @@ zwrotkaV = \markup \column {
 }
 
 \markup
-\override #'(vertical-spacing . 0.5)
-\stanzas-in-columns #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
+\override #'(odstepMiedzyZwrotkami . 0.5)
+\zwrotki #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

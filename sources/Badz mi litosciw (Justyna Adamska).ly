@@ -165,4 +165,6 @@ zwrotkaV = \markup \column {
   \midi {}
 }
 
-\zwrotki \markuplist { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
+\markup{
+  \zwrotki #2 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
+}
