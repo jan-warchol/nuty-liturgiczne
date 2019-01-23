@@ -1,74 +1,92 @@
 \version "2.19.3"
 
 \header	{
-  title = "Już się nie lękaj"
+  title = "O Pani, ufność nasza"
   subtitle = "(ostinato)"
-  composer = "muzyka: Taizé"
+  subsubtitle = " "
+  composer = "muzyka: Jacek Gałuszka OP"
 }
 
 %--------------------------------MUZYKA
 metrumitp = {
-  \key a \minor
-  \time 4/4
-  \tempo 4=80
+  \key es \major
+  \time 3/4
+  \tempo 4=90
   \set Score.tempoHideNote = ##t
+  \partial 4
 }
 
 melodiaSopranu =
 \relative f' {
   \metrumitp
-  e8^\p e4 g8 f4 f | d8 d4 f8 e4 e |
-  a8^\mf a a4 b b | b8 b4 b8 c4 c |
-  % 5
-  e,8^\p e4 g8 f4 f | d8 d4 f8 e4 e |
-  a^\f a b2 | gis a
+  es4 |
+  bes' bes c8 as |
+  bes4 bes as |
+  g g8[\melisma f]\melismaEnd g as |
+  f4 f g |
+  es2 bes'8[\melisma f]\melismaEnd |
+  g2 as4 |
+  g as8 g f4 |
+  es2 r4
   \bar "|."
 }
 melodiaAltu =
 \relative f' {
   \metrumitp
-  c8^\p c4 c8 c4 c | b8 b4 b8 b4 b |
-  a8^\mf a c4 b b | e8 e4 e8 e4 e |
-  % 5
-  c8^\p c4 c8 c4 c | b8 b4 b8 b4 b |
-  c4^\f c b2 | b c
+  bes,4 |
+  g' g as8 f |
+  g4 g f |
+  es es es8 es |
+  d4 d d |
+  c2 d4 |
+  es2 es8[\melisma f]\melismaEnd |
+  es4 es8 es es[\melisma d]\melismaEnd |
+  bes2 r4
   \bar "|."
 }
 melodiaTenorow =
 \relative f {
   \metrumitp
-  a8^\p a4 a8 a4 a | g8 g4 g8 g4 g |
-  f8^\mf f f4 f f | a8 a4 gis8 a4 a |
-  % 5
-  a8^\p a4 a8 a4 a | g8 g4 g8 g4 g |
-  f^\f f f2 | e e
+  g4 |
+  bes bes bes8 bes |
+  bes4 bes c |
+  bes bes bes8 bes |
+  bes4 bes b |
+  g2 bes4 |
+  bes2 c8[\melisma d]\melismaEnd |
+  bes4 c8 c bes4 |
+  g2 r4
   \bar "|."
 }
 melodiaBasow =
 \relative f {
   \metrumitp
-  a,8^\p a4 a8 d4 d | g,8 g4 g8 c4 c |
-  f8^\mf f f4 d d | e8 e4 e8 a,4 a |
-  % 5
-  a8^\p a4 a8 d4 d | g,8 g4 g8 c4 c |
-  f^\f f d2 | e a,
+  es4 |
+  es es es8 es |
+  es4 es es |
+  es es es8 es |
+  bes4 bes g |
+  c2 bes4 |
+  es2 as,8[\melisma bes]\melismaEnd |
+  es4 as,8 as bes4 |
+  es2 r4
   \bar "|."
 }
 
 akordy = \chordmode {
-  a2:m d:m7 g c:maj7
-  f b:dim e:sus4 a:m
-  a2:m d:m7 g c:maj7
-  f b:dim e a:m
+  % Inna możliwość: Es As Es As Es B G c B Es B7 Es As B Es
+  s4 es2 es4:sus4 es2 f4:m7 es2. bes2
+  g4  c2:m bes4 es2 as4 es as bes es2
 }
 
 %--------------------------------SŁOWA
 tekst = \lyricmode {
-  \set stanza = "1."
-  Już się nie lę -- kaj, po -- rzuć zmar -- twie -- nia,
-  Bo -- gu za -- u -- faj, nic ci nie gro -- zi.
-  Już się nie lę -- kaj, po -- rzuć zmar -- twie -- nia,
-  Bóg mi -- ło -- ścią jest.
+  O Pa -- ni,
+  u -- fność na -- sza
+  w_mo -- dli -- twy
+  Twej o -- bro -- nie,
+  chroń nas, chroń nas,
+  Kró -- lo -- wo Po -- ko -- ju!
 }
 
 tekstSopranu = \tekst
@@ -84,10 +102,10 @@ tekstBasow = \tekst
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 10
+  markup-system-spacing.basic-distance = 18
+  system-system-spacing.basic-distance = 20
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA

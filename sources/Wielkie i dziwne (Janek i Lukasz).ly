@@ -2,7 +2,7 @@
 
 \header	{
   title = "Wielkie i dziwne są dzieła Twoje"
-  subsubtitle = "wersja 2 - nieco inna harmonizacja"
+  subtitle = " "
   composer = "muzyka: ks. H. Markwica"
   arranger = "opracowanie: Łukasz Czerwiński, Jan Warchoł"
   poet = "słowa: por. Ap 15, 3-4"
@@ -30,8 +30,8 @@ melodiaSopranu =
 melodiaAltu =
 \relative f' {
   \metrumitp
-  e4 e8 e | d4 d | e d8 c | b4 b4 |
-  d4. d8 | fis4 fis | e4. e8 | e4 d |
+  d4 d8 d | d4 d | e d8 c | b4 b4 |
+  d4 d8 ([e]) | fis4 fis | e4. e8 | e4 d |
   d d8 d8 | a4 a | b b8 d8 | e4 e |
   % 13: Królu narodów...
   c2 | d4. d8 | e8 ([d]) e4 ~ | e2 |
@@ -42,33 +42,33 @@ melodiaTenorow =
 \relative f {
   \metrumitp
   b4 b8 b8 | a4 a | c4 b8 a8 | g4 g4 |
-  b4 b4 | a4 a4 | a4. a8 | c4 a4 |
+  b4 b4 | a4 a4 | a4. a8 | c4 c4 |
   r8 b b b | a4 a | r8 fis g a | g4 g |
   % 13: Królu narodów...
   r2 | a | b4. a8 | b ([a]) g4 |
-  r4 c4 | a4. a8 | b8 ([a8]) g4 ~ | g2
+  r4 b4 | a4. a8 | b8 ([a8]) g4 ~ | g2
   \bar "|."
 }
 melodiaBasow =
 \relative f {
   \metrumitp
-  e4 e8 e8 | d4 d | a4 a8 c8 | e4 e4 |
+  g,4 g8 g8 | d'4 d | a4 a8 c8 | e4 e4 |
   g4. g8 | d4 d4 | c4 c4 | c4 d4 |
   g a8 g | fis4 d | fis g8 fis | e4 e |
   % 13: Królu narodów...
-  r2 | d2 | e4. e8 | g8 ([fis]) e4 |
-  r4 c4 | d4. d8 | g8 ([fis8]) e4 ~ | e2
+  r2 | b2 | e4. e8 | g8 ([fis]) e4 |
+  r4 c4 | b4. b8 | g'8 ([fis8]) e4 ~ | e2
   \bar "|."
 }
 
 \include "input-shorthands/optional-chord/definitions.ily"
 
 akordy = \chordmode {
-  e2:m d a:m e:m g d
-  a2:m c4 d g2 d b4:m \optionalChord g8 \optionalChord d e2:m
+  g2 d a:m e:m g d
+  a:m c4 d:7 g2 d b4:m \optionalChord g8 \optionalChord d e2:m
   %Królu narodów
-  c2 d e1:m
-  c2 d e1:m
+  c b:m7 e:m s2
+  c:maj7 b:m7 e:m R
 }
 
 %--------------------------------SŁOWA
@@ -107,10 +107,11 @@ zwrotkaIII = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  system-count = 3
+  top-markup-spacing.basic-distance = 8
+  markup-system-spacing.basic-distance = 16
+  system-system-spacing.basic-distance = 17
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
@@ -135,4 +136,4 @@ zwrotkaIII = \markup \column {
   \midi {}
 }
 
-\markup \stanzas-in-two-columns { \zwrotkaII } { \zwrotkaIII }
+\markup \zwrotki #2 { \zwrotkaII \zwrotkaIII }

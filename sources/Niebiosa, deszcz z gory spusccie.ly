@@ -10,11 +10,11 @@
 \paper {
   %system-count = #3
   ragged-last-bottom = ##t
-  top-markup-spacing #'basic-distance = #4
-  markup-system-spacing #'basic-distance = #11
-  system-system-spacing #'basic-distance = #14
-  score-system-spacing #'basic-distance = #22
-  last-bottom-spacing #'basic-distance = #8
+  top-markup-spacing.basic-distance = #4
+  markup-system-spacing.basic-distance = #11
+  system-system-spacing.basic-distance = #14
+  score-system-spacing.basic-distance = #22
+  last-bottom-spacing.basic-distance = #8
 }
 
 uparrow = \markup {

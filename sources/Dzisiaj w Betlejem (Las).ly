@@ -185,10 +185,10 @@ zwrotkaV = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 4
-  markup-system-spacing #'padding = -3
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 4
+  markup-system-spacing.padding = -3
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
@@ -212,4 +212,4 @@ zwrotkaV = \markup \column {
   \midi {}
 }
 
-\markup \stanzas-in-two-columns { \zwrotkaII \zwrotkaIII } { \zwrotkaIV \zwrotkaV }
+\markup \zwrotki #2 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }

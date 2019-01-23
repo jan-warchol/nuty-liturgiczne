@@ -4,7 +4,7 @@
   title = "Wielkie i dziwne są dzieła Twoje"
   subtitle = " "
   composer = "muzyka: ks. H. Markwica"
-  arranger = "opracowanie: Łukasz Czerwiński, Jan Warchoł"
+  arranger = "opracowanie: Marek Miziołek"
   poet = "słowa: por. Ap 15, 3-4"
 }
 
@@ -12,63 +12,120 @@
 metrumitp = {
   \key g \major
   \time 2/4
-  \tempo Moderato 4=75
 }
 
 melodiaSopranu =
 \relative f' {
   \metrumitp
-  g4 g8 g | fis4 fis | a a8 e | g8 ([fis8]) e4 |
-  b'4 b4 | a4 a | a a4 | g4 fis |
-  g g8 g | d4 d | d d8 d | e4 e |
+  g4 g8 g8
+  fis4 fis4 |
+  a4 a8 e8 |
+  g8( fis8) e4 |
+  b'4 b4 |
+  a4 a4 |
+  a4 a4 |
+  g4 fis4 |
+  g4 g8 g8 |
+  d4 d4 |
+  d4 d8 d8 |
+  e4 e4 |
   \break
-  % 13: Królu narodów...
-  e2 | fis4. fis8 | g ([fis]) e4 ~ | e2 |
-  e2 | fis4. fis8 | g ([fis]) e4 ~ | e2
+  e2 |
+  fis4. fis8 |
+  g8( fis8) e4 ~ |
+  e r4 |
+  e2 |
+  fis4. fis8 |
+  g8( fis8) e4 ~ |
+  e4 r |
   \bar "|."
 }
 melodiaAltu =
 \relative f' {
   \metrumitp
-  d4 d8 d | d4 d | e d8 c | b4 b4 |
-  d4 d8 ([e]) | fis4 fis | e4. e8 | e4 d |
-  d d8 d8 | a4 a | b b8 d8 | e4 e |
-  % 13: Królu narodów...
-  c2 | d4. d8 | e8 ([d]) e4 ~ | e2 |
-  c2 | d4. d8 | e8 ([fis8]) e4 ~ | e2
+  g4 g8 g8
+  fis4 fis4 |
+  e4 e8 c8 |
+  d4 e4 |
+  e4 e4 |
+  a8( g8) a4 |
+  e4 e4 |
+  c4 d4 |
+  d4 d8 g8 |
+  e4 d4 |
+  d4 b8 d8 |
+  g8( fis8) e4 |
+  e2 |
+  d4. d8 |
+  e8( d8) e4 ~ |
+  e4 r4 |
+  e2 |
+  d4. d8 |
+  e8( d8) e4 ~ |
+  e4 r4 |
   \bar "|."
 }
 melodiaTenorow =
 \relative f {
   \metrumitp
-  b4 b8 b8 | a4 a | c4 b8 a8 | g4 g4 |
-  b4 b4 | a4 a4 | a4. a8 | c4 c4 |
-  r8 b b b | a4 a | r8 fis g a | g4 g |
-  % 13: Królu narodów...
-  r2 | a | b4. a8 | b ([a]) g4 |
-  r4 b4 | a4. a8 | b8 ([a8]) g4 ~ | g2
+  b4 b8
+  d8 |
+  a4 a4 |
+  c4 d8 e8 |
+  % początkowo pierwszym dźwiękiem miało być g,
+  % ale zostało zmienione na e żeby dało się zaśpiewać.
+  e8( d8) e4 |
+  b4 b4 |
+  d4 d4 |
+  e4 e4 |
+  c4 d4 |
+  g,4 d8 g8 |
+  a8( g8) a4 |
+  a4 b8 a8 |
+  b4 b4 |
+  c8( b8 a8 g8) |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
+  e,8( fis8 g4) |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
   \bar "|."
 }
 melodiaBasow =
 \relative f {
   \metrumitp
-  g,4 g8 g8 | d'4 d | a4 a8 c8 | e4 e4 |
-  g4. g8 | d4 d4 | c4 c4 | c4 d4 |
-  g a8 g | fis4 d | fis g8 fis | e4 e |
-  % 13: Królu narodów...
-  r2 | b2 | e4. e8 | g8 ([fis]) e4 |
-  r4 c4 | b4. b8 | g'8 ([fis8]) e4 ~ | e2
+  b,4 b8 d8 |
+  a4 a4 |
+  % to e jest zdecydowanie za nisko dla zwykłych basów.
+  % proponuję zmienić je na g -- Janek Warchoł
+  a4 a8 e8 |
+  g8( a) b4 |
+  g4 g4 |
+  d'4 d4 |
+  a4 b8( c8) |
+  d4 d4 |
+  g,4 g8 g8 |
+  d'4 d4 |
+  b4 b8 b8 |
+  c8( b8) a4 |
+  c2 |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
+  c2 |
+  a4. a8 |
+  b8( a8) b4 ~ |
+  b4 r4 |
   \bar "|."
 }
-
-\include "input-shorthands/optional-chord/definitions.ily"
-
 akordy = \chordmode {
-  g2 d a:m e:m g d
-  a:m c4 d:7 g2 d b4:m \optionalChord g8 \optionalChord d e2:m
+  g2 d a:m e:m7 g d
+  a:m d4:7sus4 d:7 g2 d b:m7 e:m
   %Królu narodów
-  c b:m7 e:m s2
-  c:maj7 b:m7 e:m R
+  c2 d e1:m
+  c2 d e1:m
 }
 
 %--------------------------------SŁOWA
@@ -107,11 +164,10 @@ zwrotkaIII = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  system-count = 3
-  top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 16
-  system-system-spacing #'basic-distance = 17
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 8
+  markup-system-spacing.basic-distance = 18
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
@@ -136,4 +192,4 @@ zwrotkaIII = \markup \column {
   \midi {}
 }
 
-\markup \stanzas-in-columns #2 { \zwrotkaII \zwrotkaIII }
+\markup \zwrotki #2 { \zwrotkaII \zwrotkaIII }

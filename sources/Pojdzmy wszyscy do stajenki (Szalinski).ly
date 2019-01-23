@@ -144,10 +144,10 @@ zwrotkaV = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 10
-  markup-system-spacing #'basic-distance = 20
-  system-system-spacing #'basic-distance = 20
-  score-markup-spacing #'basic-distance = 18
+  top-markup-spacing.basic-distance = 10
+  markup-system-spacing.basic-distance = 20
+  system-system-spacing.basic-distance = 20
+  score-markup-spacing.basic-distance = 18
 }
 
 %--------------------------------STRUKTURA
@@ -172,8 +172,8 @@ zwrotkaV = \markup \column {
 }
 
 \markup
-\override #'(stanza-vdist . 1.5)
-\stanzas-in-one-column {
+\override #'(odstepMiedzyZwrotkami . 1.5)
+\zwrotki #1 {
   \zwrotkaII
   \zwrotkaIII
   \zwrotkaIV

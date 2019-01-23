@@ -98,10 +98,10 @@ tekstBasow = \tekst
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = 8
-  markup-system-spacing #'basic-distance = 18
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 8
+  markup-system-spacing.basic-distance = 18
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA

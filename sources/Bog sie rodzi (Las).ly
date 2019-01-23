@@ -169,10 +169,10 @@ zwrotkaIV = \markup \column {
 \include "ustawienia.ily"
 
 \paper {
-  top-markup-spacing #'basic-distance = #5
-  markup-system-spacing #'basic-distance = #21
-  system-system-spacing #'basic-distance = 17
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = #5
+  markup-system-spacing.basic-distance = #21
+  system-system-spacing.basic-distance = 17
+  score-markup-spacing.basic-distance = 14
   left-margin = 13 \mm
   right-margin = 13 \mm
 }
@@ -206,36 +206,5 @@ zwrotkaIV = \markup \column {
 }
 
 \markup {
-  \justify-line {
-    \scale #'(1.04 . 1.1) {
-      \null
-
-      \line {
-        \bold
-        "2."
-        \hspace #0.5
-        \zwrotkaII
-      }
-
-      \null
-
-      \line {
-        \bold
-        "3."
-        \hspace #0.5
-        \zwrotkaIII
-      }
-
-      \null
-
-      \line {
-        \bold
-        "4."
-        \hspace #0.5
-        \zwrotkaIV
-      }
-
-      \null
-    }
-  }
-}
+  \override #'(odstepOdNumeruDoZwrotki . 0.5)
+  \zwrotki #3 { \zwrotkaII \zwrotkaIII \zwrotkaIV } }

@@ -125,10 +125,10 @@ zwrotkaV = \markup \column {
 
 \paper {
   system-count = #3
-  top-markup-spacing #'basic-distance = 5
-  markup-system-spacing #'padding = 0
-  system-system-spacing #'basic-distance = 18
-  score-markup-spacing #'basic-distance = 14
+  top-markup-spacing.basic-distance = 5
+  markup-system-spacing.padding = 0
+  system-system-spacing.basic-distance = 18
+  score-markup-spacing.basic-distance = 14
 }
 
 %--------------------------------STRUKTURA
@@ -153,6 +153,6 @@ zwrotkaV = \markup \column {
 }
 
 \markup
-\override #'(line-spacing . 0.85)
-\override #'(stanza-vdist . 0.55)
-\stanzas-in-one-column { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
+\override #'(interlinia . 0.85)
+\override #'(odstepMiedzyZwrotkami . 0.55)
+\zwrotki #1 { \zwrotkaII \zwrotkaIII \zwrotkaIV \zwrotkaV }
